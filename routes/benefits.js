@@ -10,10 +10,10 @@ router.get('/', function(req, res, next) {
   // And insert something like this instead:
   res.json([{
   	id: 1,
-  	username: "[DEVELOPER NAME 1]"
+  	username: "[BENEFITS PACKAGE 1]"
   }, {
   	id: 2,
-  	username: "[DEVELOPER NAME 2]"
+  	username: "[BENEFITS PACKAGE 2]"
   }]);
 });
 

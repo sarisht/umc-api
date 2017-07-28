@@ -10,14 +10,15 @@ router.get('/', function(req, res, next) {
   // And insert something like this instead:
   res.json([{
   	id: 1,
-  	username: "[DEVELOPER NAME 1]"
+  	username: "[CLAIM NAME 1]"
   }, {
   	id: 2,
-  	username: "[DEVELOPER NAME 2]"
+  	username: "[CLAIM NAME 2]"
   }]);
 });
 
 router.post('/', function(req, res) { });
 router.get('/:id', function(req, res) { });
+router.patch('/:id', function(req, res) { });
 
 module.exports = router;
