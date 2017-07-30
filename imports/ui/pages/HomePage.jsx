@@ -8,7 +8,7 @@ class HomePage extends Component {
     renderPolicies() {
         return this.props.policies.map((policy) => {
             return (
-                <a href="#!" key={policy._id} className="collection-item">{policy.name} - {policy.amount} UMC</a>
+                <a href="#" key={policy._id} className="collection-item">{policy.name} - {policy.amount} UMC</a>
             );
         });
     }
@@ -20,7 +20,7 @@ class HomePage extends Component {
                     <div className="col s12">
                         <ul className="collection with-header">
                             <li className="collection-header">
-                                <h4>Your Policies</h4>
+                                <h4>My Policies</h4>
                             </li>
                             {this.renderPolicies()}
                         </ul>
@@ -29,7 +29,7 @@ class HomePage extends Component {
                 <div className="row">
                     <div className="col s12">
                         <ul className="collection with-header">
-                            <li className="collection-header"><h4>Your Outstanding Claims</h4></li>
+                            <li className="collection-header"><h4>My Outstanding Claims</h4></li>
                             <li className="collection-item">NYI</li>
                         </ul>
                     </div>
@@ -46,7 +46,7 @@ class HomePage extends Component {
         );
     }
 
-    renderLoggedOut() {
+    static renderLoggedOut() {
         return (
             <div className="section">
                 <h4>Please Log In</h4>

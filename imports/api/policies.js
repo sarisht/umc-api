@@ -5,11 +5,12 @@ import { check } from 'meteor/check';
 export const Policies = new Mongo.Collection('policies');
 
 if (Meteor.isServer) {
-    // Only publish tasks that belong to the current user
+    // Only publish active policies that belong to the current user
     Meteor.publish('policies', function policiesPublication() {
         return Policies.find({
-            $or: [
+            $and: [
                 { owner: this.userId },
+                { active: true },
             ],
         });
     });
@@ -20,29 +21,30 @@ Meteor.methods({
         check(name, String);
         check(amount, String);
 
-        // Make sure the user is logged in before inserting a policy
-        if (!Meteor.userId()) {
+        // Ensure user logged in
+        if (!this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
+        // Insert policy
         Policies.insert({
             name,
             amount,
-            createdAt: new Date(),
-            owner: Meteor.userId(),
             active: true,
-            // need to track policy payout
+            owner: this.userId,
+            createdAt: new Date(),
         });
     },
-    'policies.remove'(policyId) {
+    'policies.setActive'(policyId, active) {
         check(policyId, String);
 
+        // Ensure user owns policy
         const policy = Policies.findOne(policyId);
-
-        if (policy.owner !== Meteor.userId()) {
+        if (policy.owner !== this.userId) {
             throw new Meteor.Error('not-authorized');
         }
 
-        Policies.remove(policyId);
+        // Update policy
+        Policies.update(policyId, { $set: { active } });
     },
 });
