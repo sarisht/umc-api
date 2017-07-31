@@ -21,7 +21,7 @@ if (Meteor.isServer) {
 
                 // Insert policy
                 const insertPolicy = Meteor.server.method_handlers['policies.insert'];
-                insertPolicy.apply({ userId }, ["Test", "100"]);
+                insertPolicy.apply({ userId }, ["Test", 100]);
 
                 // Verify count
                 assert.equal(Policies.find().count(), 1);

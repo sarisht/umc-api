@@ -16,7 +16,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     'claims.insert'(policyId, ask) {
         check(policyId, String);
-        check(ask, String);
+        check(ask, Number);
 
         // Ensure user logged in
         if (!this.userId) {

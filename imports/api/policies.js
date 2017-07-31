@@ -19,7 +19,7 @@ if (Meteor.isServer) {
 Meteor.methods({
     'policies.insert'(name, amount) {
         check(name, String);
-        check(amount, String);
+        check(amount, Number);
 
         // Ensure user logged in
         if (!this.userId) {
