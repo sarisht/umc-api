@@ -23,12 +23,12 @@ if (Meteor.isServer) {
 
                 // Insert policy
                 const insertPolicy = Meteor.server.method_handlers['policies.insert'];
-                insertPolicy.apply({ userId }, ["Test", "100"]);
+                insertPolicy.apply({ userId }, ["Test", 100]);
                 const policyId = Policies.findOne()._id;
 
                 // Insert claim
                 const insertClaim = Meteor.server.method_handlers['claims.insert'];
-                insertClaim.apply({ userId }, [policyId, "500"]);
+                insertClaim.apply({ userId }, [policyId, 500]);
 
                 // Verify count
                 assert.equal(Claims.find().count(), 1);
