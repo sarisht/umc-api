@@ -10,7 +10,7 @@ class HomePage extends Component {
         if (!this.props.policies.length)
             return <li className="collection-item">No Policies</li>;
         return this.props.policies.map((policy) => {
-            return <a href="#" key={policy._id} className="collection-item">{policy.name} - {policy.amount} UMC</a>;
+            return <a href="#" key={policy._id} className="collection-item">Name: {policy.name}, Amount: {policy.amount} UMC</a>;
         });
     }
 
@@ -18,7 +18,7 @@ class HomePage extends Component {
         if (!this.props.claims.length)
             return <li className="collection-item">No Claims</li>;
         return this.props.claims.map((claim) => {
-            return <a href="#" key={claim._id} className="collection-item">{claim.policyId} - {claim.ask} UMC</a>;
+            return <a href="#" key={claim._id} className="collection-item">Policy: {claim.policyName}, Ask: {claim.ask} UMC</a>;
         });
     }
 
@@ -26,7 +26,7 @@ class HomePage extends Component {
         if (!this.props.othersClaims.length)
             return <li className="collection-item">No Claims</li>;
         return this.props.othersClaims.map((claim) => {
-            return <a href="#" key={claim._id} className="collection-item">{claim.policyId} - {claim.ask} UMC</a>;
+            return <a href="#" key={claim._id} className="collection-item">Policy: {claim.policyName}, Ask: {claim.ask} UMC</a>;
         });
     }
 

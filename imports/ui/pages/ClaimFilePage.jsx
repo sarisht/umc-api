@@ -6,15 +6,31 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Policies } from '../../api/policies.js';
 
 class ClaimFilePage extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            askInvalid: false
+        };
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
+        // Reset form
+        this.setState({ askInvalid: false })
+
         // Get input
         const policyId = ReactDOM.findDOMNode(this.refs.policyInput).value;
-        const ask = ReactDOM.findDOMNode(this.refs.askInput).value.trim();
+        if (policyId === '')
+            return;
+        const ask = parseInt(ReactDOM.findDOMNode(this.refs.askInput).value);
+        if (isNaN(ask) || ask <= 0) {
+            this.setState({ askInvalid: true })
+            return;
+        }
 
         // Insert policy
-        console.log(policyId + ', ' + ask);
         Meteor.call('claims.insert', policyId, ask);
 
         // Clear form
@@ -36,19 +52,20 @@ class ClaimFilePage extends Component {
                         <h4 className="col s12">File Claim</h4>
                         <div className="col m6 s12">
                             <label>Select Policy</label>
-                            <select ref="policyInput" className="browser-default" selected="">
+                            <select className="browser-default" ref="policyInput" defaultValue="">
                                 <option value="" disabled>Select Policy</option>
                                 {this.renderPolicyOptions()}
                             </select>
                         </div>
                         <div className="input-field col m6 s12">
-                            <input ref="askInput" id="claimAsk" type="text"/>
+                            <input className={this.state.askInvalid ? "invalid" : ""}
+                                   ref="askInput" id="claimAsk" type="text"/>
                             <label htmlFor="claimAsk">Ask</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col s12">
-                            <button className="modal-action modal-close btn waves-effect waves-light" type="submit">Submit</button>
+                            <button className="btn waves-effect waves-light" type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -68,7 +85,6 @@ class ClaimFilePage extends Component {
         );
     }
 }
-
 
 ClaimFilePage.propTypes = {
     policies: PropTypes.array.isRequired,

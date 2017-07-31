@@ -32,6 +32,7 @@ Meteor.methods({
         // Insert claim
         Claims.insert({
             policyId,
+            policyName: policy.name,
             ask,
             active: true,
             owner: this.userId,
