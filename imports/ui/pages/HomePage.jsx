@@ -35,7 +35,7 @@ class HomePage extends Component {
             <div className="section">
                 <div className="row">
                     <div className="col s12">
-                        <ul className="collection with-header">
+                        <ul className="card collection with-header">
                             <li className="collection-header">
                                 <h4>My Policies</h4>
                             </li>
@@ -45,7 +45,7 @@ class HomePage extends Component {
                 </div>
                 <div className="row">
                     <div className="col s12">
-                        <ul className="collection with-header">
+                        <ul className="card collection with-header">
                             <li className="collection-header"><h4>My Claims</h4></li>
                             {this.renderMyClaims()}
                         </ul>
@@ -53,7 +53,7 @@ class HomePage extends Component {
                 </div>
                 <div className="row">
                     <div className="col s12">
-                        <ul className="collection with-header">
+                        <ul className="card collection with-header">
                             <li className="collection-header"><h4>Others' Claims</h4></li>
                             {this.renderOthersClaims()}
                         </ul>
