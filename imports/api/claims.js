@@ -7,14 +7,9 @@ import { Policies } from './policies';
 export const Claims = new Mongo.Collection('claims');
 
 if (Meteor.isServer) {
-    // Only publish active claims that belong to the current user
+    // Only publish active claims
     Meteor.publish('claims', function policiesPublication() {
-        return Claims.find({
-            $and: [
-                { owner: this.userId },
-                { active: true },
-            ],
-        });
+        return Claims.find({ active: true });
     });
 }
 

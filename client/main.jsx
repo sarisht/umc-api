@@ -5,7 +5,6 @@ import { Router, Route } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import HomePage from '../imports/ui/pages/HomePage.jsx';
-import PolicyAddPage from '../imports/ui/pages/PolicyAddPage.jsx';
 import { Footer } from '../imports/ui/components/Footer.jsx';
 import Nav from '../imports/ui/components/Nav.jsx';
 
@@ -18,9 +17,9 @@ const renderRoutes = () => (
             <main className="container">
                 <Route exact path="/" component={HomePage} />
                 {/*<Route exact path="/policies/add" component={PolicyAddPage} />
-                <Route path="claims/:id" component={ClaimPage} />
-                <Route path="claims/file" component={ClaimFilePage} />
-                <Route path="policies/:id" component={PolicyPage} />
+                <Route path="/claims/:id" component={ClaimPage} />
+                <Route path="/claims/file" component={ClaimFilePage} />
+                <Route path="/policies/:id" component={PolicyPage} />
                 */}
             </main>
             <Footer />
