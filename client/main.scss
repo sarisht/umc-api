@@ -5,6 +5,8 @@ $secondary-color: color("blue", "accent-4") !default;
 
 $footer-copyright-bg-color: darken($primary-color, 8%);
 
+$card-bg-color: color("grey", "darken-2") !default;
+
 $collection-border-color: color("grey", "base") !default;
 $collection-bg-color: color("grey", "darken-2") !default;
 $collection-hover-bg-color: color("grey", "darken-1") !default;
@@ -36,4 +38,8 @@ body {
 
 select {
   color: black;
+}
+
+strong {
+  font-weight: bold;
 }

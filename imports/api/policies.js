@@ -5,14 +5,9 @@ import { check } from 'meteor/check';
 export const Policies = new Mongo.Collection('policies');
 
 if (Meteor.isServer) {
-    // Only publish active policies that belong to the current user
+    // Only publish active policies
     Meteor.publish('policies', function policiesPublication() {
-        return Policies.find({
-            $and: [
-                { owner: this.userId },
-                { active: true },
-            ],
-        });
+        return Policies.find({ active: true });
     });
 }
 

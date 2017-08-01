@@ -36,6 +36,9 @@ class ClaimFilePage extends Component {
         // Clear form
         ReactDOM.findDOMNode(this.refs.policyInput).value = '';
         ReactDOM.findDOMNode(this.refs.askInput).value = '';
+
+        // Close modal
+        $('#claimFileModal').modal('close');
     }
 
     renderPolicyOptions() {

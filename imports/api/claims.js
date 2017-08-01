@@ -30,7 +30,7 @@ Meteor.methods({
         }
 
         // Insert claim
-        Claims.insert({
+        var claimId = Claims.insert({
             policyId,
             policyName: policy.name,
             ask,
@@ -38,6 +38,8 @@ Meteor.methods({
             owner: this.userId,
             createdAt: new Date(),
         });
+
+        console.log(claimId);
     },
     'claims.setActive'(claimId, active) {
         check(claimId, String);

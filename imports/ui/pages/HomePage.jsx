@@ -14,49 +14,53 @@ class HomePage extends Component {
         });
     }
 
-    renderMyClaims() {
-        if (!this.props.claims.length)
+    renderClaims(claims) {
+        if (!claims.length)
             return <li className="collection-item">No Claims</li>;
-        return this.props.claims.map((claim) => {
-            return <a href="#" key={claim._id} className="collection-item">Policy: {claim.policyName}, Ask: {claim.ask} UMC</a>;
-        });
-    }
-
-    renderOthersClaims() {
-        if (!this.props.othersClaims.length)
-            return <li className="collection-item">No Claims</li>;
-        return this.props.othersClaims.map((claim) => {
-            return <a href="#" key={claim._id} className="collection-item">Policy: {claim.policyName}, Ask: {claim.ask} UMC</a>;
+        return claims.map((claim) => {
+            var href = "/claims/" + claim._id;
+            return <a href={href}
+                      key={claim._id} className="collection-item">Policy: {claim.policyName}, Ask: {claim.ask} UMC</a>;
         });
     }
 
     renderLoggedIn() {
         return (
             <div className="section">
-                <div className="row">
-                    <div className="col s12">
-                        <ul className="card collection with-header">
-                            <li className="collection-header">
-                                <h4>My Policies</h4>
-                            </li>
-                            {this.renderMyPolicies()}
-                        </ul>
+                <div>
+                    <h4>Manage Your Data</h4>
+                    <div className="row">
+                        <div className="col s6">
+                            <ul className="card collection with-header">
+                                <li className="collection-header">
+                                    <h5>My Policies</h5>
+                                </li>
+                                {this.renderMyPolicies()}
+                            </ul>
+                        </div>
+                        <div className="col s6">
+                            <ul className="card collection with-header">
+                                <li className="collection-header"><h5>My Claims</h5></li>
+                                {this.renderClaims(this.props.claims)}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s12">
-                        <ul className="card collection with-header">
-                            <li className="collection-header"><h4>My Claims</h4></li>
-                            {this.renderMyClaims()}
-                        </ul>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col s12">
-                        <ul className="card collection with-header">
-                            <li className="collection-header"><h4>Others' Claims</h4></li>
-                            {this.renderOthersClaims()}
-                        </ul>
+                <div>
+                    <h4>Others' Claims</h4>
+                    <div className="row">
+                        <div className="col s6">
+                            <ul className="card collection with-header">
+                                <li className="collection-header"><h5>Awaiting Votes</h5></li>
+                                {this.renderClaims(this.props.othersClaims)}
+                            </ul>
+                        </div>
+                        <div className="col s6">
+                            <ul className="card collection with-header">
+                                <li className="collection-header"><h5>All Claims</h5></li>
+                                {this.renderClaims(this.props.othersClaims)}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
