@@ -97,6 +97,6 @@ export default createContainer(() => {
     Meteor.subscribe('policies');
 
     return {
-        policies: Policies.find({}, { sort: { name: 1 } }).fetch(),
+        policies: Policies.find({ owner: Meteor.userId() }, { sort: { name: 1 } }).fetch(),
     };
 }, ClaimFilePage);

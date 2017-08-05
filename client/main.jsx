@@ -13,7 +13,7 @@ const browserHistory = createBrowserHistory();
 
 const renderRoutes = () => (
     <Router history={browserHistory}>
-        <div>
+        <div className="flexbox-wrapper">
             <Nav />
             <main className="container">
                 <Route exact path="/" component={HomePage} />

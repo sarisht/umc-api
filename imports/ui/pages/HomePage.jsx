@@ -70,7 +70,7 @@ class HomePage extends Component {
     static renderLoggedOut() {
         return (
             <div className="section">
-                <h4>Please Log In</h4>
+                <h4>Please Sign In</h4>
             </div>
         );
     }
@@ -96,7 +96,7 @@ export default createContainer(() => {
     Meteor.subscribe('claims');
 
     return {
-        policies: Policies.find({}, { sort: { createdAt: -1 } }).fetch(),
+        policies: Policies.find({ owner: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
         claims: Claims.find({ owner: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
         othersClaims: Claims.find({ owner: { $ne: Meteor.userId() } }, { sort: { createdAt: -1 } }).fetch(),
         currentUser: Meteor.user(),

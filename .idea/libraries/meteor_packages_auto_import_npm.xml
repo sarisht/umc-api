@@ -389,7 +389,6 @@
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/index.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/polyfill.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/polyfill-done.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.2.0/npm/node_modules/semver/semver.js" />
         <item url="file://$USER_HOME$/.meteor/packages/materialize_materialize/0.99.0/npm/node_modules/jodid25519/index.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/core.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/lib/done.js" />
@@ -1675,6 +1674,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/_cloneDataView.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/size.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/compact.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.3.1/npm/node_modules/semver/semver.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/result.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/_baseOrderBy.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/slice.js" />
@@ -6385,7 +6385,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/index.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/polyfill.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/polyfill-done.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.2.0/npm/node_modules/semver/semver.js" />
       <root url="file://$USER_HOME$/.meteor/packages/materialize_materialize/0.99.0/npm/node_modules/jodid25519/index.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/core.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/npm/node_modules/promise/lib/done.js" />
@@ -7671,6 +7670,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/_cloneDataView.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/size.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/compact.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.3.1/npm/node_modules/semver/semver.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/result.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/_baseOrderBy.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.19.4/npm/node_modules/lodash/slice.js" />

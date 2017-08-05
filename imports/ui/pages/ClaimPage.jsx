@@ -1,11 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import classnames from 'classnames';
 
-import { Claims } from "../../api/claims.js";
-import { Policies } from '../../api/policies.js';
+import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from "../../api/claims.js";
 
 class ClaimPage extends Component {
+    handleVoteClick(vote) {
+        Meteor.call('claims.vote', this.props.claim._id, vote);
+    }
+
+    renderVoteButton(text, vote) {
+        console.log(vote + "," + this.props.currentVote);
+        const buttonClassName = classnames({
+            'disabled': vote === this.props.currentVote,
+            'waves-effect waves-light btn': true,
+        });
+
+        return (
+            <a onClick={this.handleVoteClick.bind(this, vote)} className={buttonClassName}>{text}</a>
+        );
+    }
+
     renderLoaded() {
         return (
             <div className="section">
@@ -14,7 +30,7 @@ class ClaimPage extends Component {
                         <div className="card-content">
                             <div className="row">
                                 <div className="col s12">
-                                    <h4>This is a claim for '{this.props.policy.name}' policy.</h4>
+                                    <h4>This is a claim for '{this.props.claim.policyName}' policy.</h4>
                                     <p>User is asking for {this.props.claim.ask} UMC. Evidence would be here.</p>
                                 </div>
                             </div>
@@ -22,9 +38,9 @@ class ClaimPage extends Component {
                                 <div className="row">
                                     <div className="col s12">
                                         <h5>How do you vote?</h5>
-                                        <a className="waves-effect waves-light btn">Yes</a>&nbsp;
-                                        <a className="waves-effect waves-light btn">No</a>&nbsp;
-                                        <a className="waves-effect waves-light btn">Needs More Information</a>
+                                        {this.renderVoteButton('Yes', VOTE_YES)}&nbsp;
+                                        {this.renderVoteButton('No', VOTE_NO)}&nbsp;
+                                        {this.renderVoteButton('Needs More Information', VOTE_NMI)}
                                     </div>
                                 </div>
                                 : ''}
@@ -64,25 +80,22 @@ class ClaimPage extends Component {
 }
 
 ClaimPage.propTypes = {
+    loading: PropTypes.bool,
     claim: PropTypes.object,
-    policy: PropTypes.object,
     currentUser: PropTypes.object,
+    currentVote: PropTypes.number,
 };
 
-export default createContainer((props) => {
-    Meteor.subscribe('claims');
-    Meteor.subscribe('policies');
-
-    let claim, policy;
-
-    claim = Claims.findOne(props.match.params.id);
-    if (claim) {
-        policy = Policies.findOne({_id: claim.policyId});
-    }
+export default ClaimPageContainer =  createContainer((props) => {
+    const claimsHandle = Meteor.subscribe('claims');
+    const loading = !claimsHandle.ready();
+    const claim = Claims.findOne(props.match.params.id);
+    const currentVote = (claim && claim.votes[Meteor.userId()] !== undefined) ? claim.votes[Meteor.userId()] : -1;
 
     return {
+        loading,
         claim,
-        policy,
         currentUser: Meteor.user(),
+        currentVote,
     };
 }, ClaimPage);

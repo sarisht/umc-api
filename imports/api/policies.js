@@ -1,20 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 
 export const Policies = new Mongo.Collection('policies');
 
 if (Meteor.isServer) {
     // Only publish active policies
     Meteor.publish('policies', function policiesPublication() {
-        return Policies.find({ active: true });
+        return Policies.find({ owner: this.userId, active: true });
     });
 }
 
 Meteor.methods({
     'policies.insert'(name, amount) {
         check(name, String);
-        check(amount, Number);
+        check(amount, Match.Integer);
 
         // Ensure user logged in
         if (!this.userId) {

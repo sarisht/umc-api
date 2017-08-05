@@ -90,7 +90,6 @@
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/meteor/test-app/client/main.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/meteor/test-app/client/client-test.js" />
         <item url="file://$USER_HOME$/.meteor/packages/autoupdate/1.3.12/web.browser/autoupdate_client.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/localstorage/1.1.0/web.browser/localstorage.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/acceptance/misc/only/qunit.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/acceptance/misc/only/tdd.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/acceptance/misc/only/bdd-require.js" />
@@ -253,7 +252,6 @@
         <item url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/preamble.js" />
         <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/multi-file-caching-compiler.js" />
         <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/caching-compiler.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.2.0/web.browser/check-npm-versions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_chai/2.1.0_1/web.browser/packages/practicalmeteor_chai.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_loglevel/1.2.0_2/web.browser/packages/practicalmeteor_loglevel.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/index.js" />
@@ -293,8 +291,10 @@
         <item url="file://$USER_HOME$/.meteor/packages/srp/1.0.10/web.browser/srp.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/debug.js" />
         <item url="file://$USER_HOME$/.meteor/packages/srp/1.0.10/web.browser/biginteger.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.3.1/web.browser/check-npm-versions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/events.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/web.browser/common.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/localstorage/1.1.1/web.browser/localstorage.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/tty.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/web.browser/client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/progress.js" />
@@ -470,7 +470,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/meteor/test-app/client/main.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/meteor/test-app/client/client-test.js" />
       <root url="file://$USER_HOME$/.meteor/packages/autoupdate/1.3.12/web.browser/autoupdate_client.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/localstorage/1.1.0/web.browser/localstorage.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/acceptance/misc/only/qunit.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/acceptance/misc/only/tdd.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/acceptance/misc/only/bdd-require.js" />
@@ -633,7 +632,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/preamble.js" />
       <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/multi-file-caching-compiler.js" />
       <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/caching-compiler.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.2.0/web.browser/check-npm-versions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_chai/2.1.0_1/web.browser/packages/practicalmeteor_chai.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_loglevel/1.2.0_2/web.browser/packages/practicalmeteor_loglevel.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/index.js" />
@@ -673,8 +671,10 @@
       <root url="file://$USER_HOME$/.meteor/packages/srp/1.0.10/web.browser/srp.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/debug.js" />
       <root url="file://$USER_HOME$/.meteor/packages/srp/1.0.10/web.browser/biginteger.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.3.1/web.browser/check-npm-versions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/events.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/web.browser/common.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/localstorage/1.1.1/web.browser/localstorage.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/tty.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.8.9/web.browser/client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/progress.js" />
