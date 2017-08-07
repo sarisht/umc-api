@@ -1,27 +1,37 @@
 @import "../imports/sass/materialize/components/_color.scss";
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-$primary-color: color("blue", "darken-4") !default;
-$secondary-color: color("blue", "accent-4") !default;
+/* Umbrella Coin Palette */
+$palette-orange: #ff6700;
+$palette-white: #ebebeb;
+$palette-gray: #c0c0c0;
+$palette-light-blue: #3a6ea5;
+$palette-dark-blue: #004e98;
 
+/* Materialize Main Colors */
+$primary-color: $palette-dark-blue !default;
+$secondary-color: $palette-orange !default;
 $footer-copyright-bg-color: darken($primary-color, 8%);
+$card-bg-color: $palette-white !default;
 
-$card-bg-color: color("grey", "darken-2") !default;
-
-$collection-border-color: color("grey", "base") !default;
-$collection-bg-color: color("grey", "darken-2") !default;
+/* Materialize Collection Colors */
+$collection-border-color: $palette-dark-blue !default;
+$collection-bg-color: $palette-white !default;
 $collection-hover-bg-color: color("grey", "darken-1") !default;
-$collection-link-color: white !default;
+$collection-link-color: black !default;
 
 @import "../imports/sass/materialize/materialize.scss";
 
-body {
-  background: color("grey", "darken-3");
-  color: white;
+
+.policy-card, .claim-card .card-content {
+  background: $palette-light-blue;
 }
 
-.collection {
-  border: none;
+body {
+  background: white;
+  color: black;
 }
+
 
 #login-buttons a:hover {
   background-color: transparent !important;
@@ -53,3 +63,92 @@ strong {
 main {
   flex: 1 !important;
 }
+
+.activator {
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+}
+
+.nav-wrapper .brand-logo img {
+  margin-top: -6px;
+  height: 64px;
+}
+
+i.add-policy {
+  font-size: 100px;
+}
+
+.add-policy-action a {
+  margin-right: 0 !important;
+}
+
+.card .collection {
+  border: none;
+  border-bottom: 1px solid $collection-border-color;
+}
+
+.claims-list .card-content {
+  position: relative;
+  overflow: visible !important;
+}
+
+.avatar {
+  min-height: 0 !important;
+}
+
+.card h3, .card h4 {
+  margin-bottom: 0;
+}
+
+.policy-card .card-title {
+  margin-bottom: 3px !important;
+}
+
+.claim-card i {
+  font-size: 50px;
+}
+
+.text-secondary {
+  opacity: 0.54;
+}
+
+/*
+.float-card h1, .float-card h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.card .collection {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.card .collection-item {
+  padding-left: 0;
+}
+*/
+
+/*
+.policy-card .card-content {
+  border-right: 1px solid $collection-border-color;
+  border-bottom-right-radius: 0;
+}
+
+.policy-card .collection {
+  margin: 0;
+  margin-left: -24px;
+  border-right: none;
+  border-top: none;
+
+}
+
+.policy-card .collection .card-title {
+  padding: 24px;
+  padding-left: 20px;
+  border-bottom: 1px solid $collection-border-color;
+  vertical-align: middle;
+}
+*/
