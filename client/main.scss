@@ -12,24 +12,39 @@ $palette-dark-blue: #004e98;
 $primary-color: $palette-dark-blue !default;
 $secondary-color: $palette-orange !default;
 $footer-copyright-bg-color: darken($primary-color, 8%);
-$card-bg-color: $palette-white !default;
+$card-bg-color: white !default;
 
 /* Materialize Collection Colors */
-$collection-border-color: $palette-dark-blue !default;
-$collection-bg-color: $palette-white !default;
-$collection-hover-bg-color: color("grey", "darken-1") !default;
+$collection-border-color: $palette-gray !default;
+$collection-bg-color: white !default;
+$collection-hover-bg-color: $palette-white !default;
 $collection-link-color: black !default;
 
 @import "../imports/sass/materialize/materialize.scss";
 
+.policy-card .card-header, .claims-card .card-header {
+  background: color('green', 'darken-1');
+  height: 105px;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  color: white;
+}
 
-.policy-card, .claim-card .card-content {
+.policy-card .policy-card-stats {
+  background: color('green', 'base');
+}
+
+.policy-card-stats {
+  padding-top: 12px !important;
+}
+
+.claim-card .card-header {
   background: $palette-light-blue;
 }
 
 body {
-  background: white;
-  color: black;
+  background: $palette-white;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 
@@ -64,10 +79,6 @@ main {
   flex: 1 !important;
 }
 
-.activator {
-  cursor: pointer;
-}
-
 .card img {
   width: 100%;
 }
@@ -90,7 +101,7 @@ i.add-policy {
   border-bottom: 1px solid $collection-border-color;
 }
 
-.claims-list .card-content {
+.claims-card .card-content {
   position: relative;
   overflow: visible !important;
 }
@@ -99,8 +110,10 @@ i.add-policy {
   min-height: 0 !important;
 }
 
-.card h3, .card h4 {
+.card h1 {
   margin-bottom: 0;
+  opacity: 0.54;
+  font-weight:bold;
 }
 
 .policy-card .card-title {
@@ -108,6 +121,7 @@ i.add-policy {
 }
 
 .claim-card i {
+  color: white;
   font-size: 50px;
 }
 

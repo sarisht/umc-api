@@ -11,34 +11,40 @@ class HomePage extends Component {
     renderPolicyCard(policy) {
         return (
             <div>
-                <div className="col s12 l5">
-                    <div className="card policy-card small">
-                        <div className="card-content">
+                <div className="col s12 m8">
+                    <div className="card policy-card medium">
+                        <div className="card-content card-header">
                             <div className="card-title">My Policy<i className="material-icons right">mode_edit</i></div>
                             <p className="text-secondary">Created July 31, 2017</p>
+                        </div>
+                        <div className="card-content policy-card-stats">
                             <div className="row">
                                 <div className="col s6">
-                                    <h3>500</h3>
+                                    <h1>500</h1>
                                     <p className="text-secondary">UMC Put In</p>
                                 </div>
                                 <div className="col s6">
-                                    <h3>2,500</h3>
-                                    <p className="text-secondary">Max Payout</p>
+                                    <h1>2,500</h1>
+                                    <p className="text-secondary">UMC Max Payout</p>
                                 </div>
                                 <div className="col s6">
-                                    <h3>2,500</h3>
-                                    <p className="text-secondary">Payout Left</p>
+                                    <h1>2,500</h1>
+                                    <p className="text-secondary">UMC Payout Left</p>
+                                </div>
+                                <div className="col s6">
+                                    <h1>120,000</h1>
+                                    <p className="text-secondary">UMC Float</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="col s12 l4">
-                    <div className="card small claims-card">
+                <div className="col s12 m4">
+                    <div className="card claims-card medium">
                         <ul className="collection">
-                            <div className="card-content teal">
-                                <a className="btn-floating halfway-fab waves-effect waves-light"><i className="material-icons">add</i></a>
-                                <div className="card-title">Claims</div>
+                            <div className="card-content card-header">
+                                <a className="btn-floating halfway-fab waves-effect waves-light yellow darken-1"><i className="material-icons">add</i></a>
+                                <div className="card-title">My Claims</div>
                             </div>
                             <a href="#" className="collection-item avatar">
                                 <i className="material-icons circle">directions_car</i>
@@ -117,8 +123,8 @@ class HomePage extends Component {
                         <p>Ask: {claim.ask} UMC</p>
                     </div>
                     <div className="card-action">
-                        <a className="white-text" href="#">Edit Claim</a>
-                        <a className="white-text" href="#">Delete Claim</a>
+                        <a href="#">Edit Claim</a>
+                        <a href="#">Delete Claim</a>
                     </div>
                 </div>
             </div>
@@ -152,7 +158,7 @@ class HomePage extends Component {
                 <h4>Manage Data</h4>
                 <div className="row">
                     {this.renderPolicyCard(this.props.policies[0])}
-                    {this.renderFloatCard()}
+                    {/*this.renderFloatCard()*/}
                 </div>
                 <h4>Vote on Claims</h4>
                 <div className="row">

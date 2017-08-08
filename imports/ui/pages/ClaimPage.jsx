@@ -26,7 +26,7 @@ class ClaimPage extends Component {
         return (
             <div className="col l4 m6 s12">
                 <div className="card claim-card">
-                    <div className="card-content light-blue darken-1">
+                    <div className="card-content card-header">
                         <div className="center-align"><i className="material-icons circle">directions_car</i></div>
                     </div>
                     <div className="card-content">
@@ -51,7 +51,7 @@ class ClaimPage extends Component {
                         </div>
                     </div>
                     <div className="card-action">
-                        <a className="white-text" href="#">View Claim</a>
+                        <a className="black-text" href="#">View Claim</a>
                     </div>
                     <div className="card-reveal">
                         <span className="card-title">Discussion<i className="material-icons right">close</i></span>
