@@ -1,101 +1,75 @@
-import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import React from 'react';
 import classnames from 'classnames';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from "../../api/claims.js";
 
-class ClaimPage extends Component {
+class ClaimPage extends React.Component {
     handleVoteClick(vote) {
         Meteor.call('claims.vote', this.props.claim._id, vote);
     }
 
     renderVoteButton(text, vote) {
-        console.log(vote + "," + this.props.currentVote);
-        const buttonClassName = classnames({
+        const buttonClassNames = classnames({
             'disabled': vote === this.props.currentVote,
             'waves-effect waves-light btn': true,
         });
 
         return (
-            <a onClick={this.handleVoteClick.bind(this, vote)} className={buttonClassName}>{text}</a>
+            <a onClick={this.handleVoteClick.bind(this, vote)} className={buttonClassNames}>{text}</a>
+        );
+    }
+
+    renderVoteButtons() {
+        return (
+            <div className="col s12">
+                <h5>How do you vote?</h5>
+                {this.renderVoteButton('Yes', VOTE_YES)}&nbsp;
+                {this.renderVoteButton('No', VOTE_NO)}&nbsp;
+                {this.renderVoteButton('Needs More Information', VOTE_NMI)}
+            </div>
         );
     }
 
     renderLoaded() {
         return (
-            <div className="col l4 m6 s12">
-                <div className="card claim-card">
-                    <div className="card-content card-header">
-                        <div className="center-align"><i className="material-icons circle">directions_car</i></div>
-                    </div>
+            <div className="section">
+                <div className="card">
                     <div className="card-content">
                         <div className="row">
                             <div className="col s12">
-                                <span className="card-title">'{this.props.claim.policyName}' Claim</span>
-                                <p>User is asking for {this.props.claim.ask} UMC.</p>
+                                <h4>Auto Claim</h4>
+                                <p>{this.props.claim.ask} UMC</p>
                             </div>
-                        </div>
-                        {/*this.props.currentUser._id !== this.props.claim.owner ?
-                            <div className="row">
-                                <div className="col s12">
-                                    <h5>How do you vote?</h5>
-                                    {this.renderVoteButton('Yes', VOTE_YES)}&nbsp;
-                                    {this.renderVoteButton('No', VOTE_NO)}&nbsp;
-                                    {this.renderVoteButton('Needs More Information', VOTE_NMI)}
-                                </div>
-                            </div>
-                            : ''*/}
-                        <div>
-
+                            {this.props.currentUser._id !== this.props.claim.owner ? this.renderVoteButtons() : null}
                         </div>
                     </div>
-                    <div className="card-action">
-                        <a className="black-text" href="#">View Claim</a>
-                    </div>
-                    <div className="card-reveal">
-                        <span className="card-title">Discussion<i className="material-icons right">close</i></span>
-                        <div className="row">
-                            <div className="col s12">
-                                <form>
-                                    <div className="input-field">
-                                        <input type="text" placeholder="Join the discussion" />
-                                    </div>
-                                </form>
-                                <p><strong>Nickname</strong><br/>Curabitur eget pretium elit. Suspendisse odio arcu, pulvinar eu tincidunt sed, viverra quis tellus.</p>
-                                <br/>
-                                <p><strong>Nickname</strong><br/>Curabitur eget pretium elit. Suspendisse odio arcu, pulvinar eu tincidunt sed, viverra quis tellus.</p>
-                                <br/>
-                                <p><strong>Nickname</strong><br/>Curabitur eget pretium elit. Suspendisse odio arcu, pulvinar eu tincidunt sed, viverra quis tellus.</p>
-                                <br/>
-                                <p><strong>Nickname</strong><br/>Curabitur eget pretium elit. Suspendisse odio arcu, pulvinar eu tincidunt sed, viverra quis tellus.</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         );
     }
 
     render() {
-        return (
-            <div>{this.props.claim ? this.renderLoaded() : ''}</div>
-        );
+        return this.props.claim ? this.renderLoaded() : null;
     }
 }
 
 ClaimPage.propTypes = {
-    claim: PropTypes.object,
-    currentUser: PropTypes.object,
-    currentVote: PropTypes.number,
+    claim: React.PropTypes.object,
+    currentUser: React.PropTypes.object,
+    currentVote: React.PropTypes.number,
 };
 
 export default ClaimPageContainer =  createContainer((props) => {
     Meteor.subscribe('claims');
 
+    const claim = Claims.findOne(props.match.params.id);
+    const currentVote = (claim && claim.votes[Meteor.userId()] !== undefined) ? claim.votes[Meteor.userId()] : -1;
+
     return {
+        claim,
         currentUser: Meteor.user(),
-        currentVote: (props.claim.votes[Meteor.userId()] !== undefined) ? props.claim.votes[Meteor.userId()] : -1,
+        currentVote,
     };
 }, ClaimPage);

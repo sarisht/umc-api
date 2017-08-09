@@ -1,59 +1,23 @@
-import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import React from 'react';
 
-import AccountsUIWrapper from './AccountsWrapper.jsx';
-import ClaimFilePage from '../pages/ClaimFilePage.jsx';
-import PolicyAddPage from '../pages/PolicyAddPage.jsx';
+import AccountsWrapper from './AccountsWrapper.jsx';
 
-$(document).ready(function(){
-    $('.modal').modal();
-});
-
-class Nav extends Component {
+export default class Nav extends React.Component {
     render() {
         return (
-            <div>
-                <nav>
-                    <div className="nav-wrapper container">
-                        <a className="left brand-logo" href="/">
-                            <div className="valign-wrapper">
-                                <img src="https://static.wixstatic.com/media/0a69bd_7cca552ce8524e90915bd9fce092b812~mv2.png/v1/fill/w_496,h_486,al_c,usm_2.00_1.00_0.00/0a69bd_7cca552ce8524e90915bd9fce092b812~mv2.png"/>
-                                Umbrella Coin
-                            </div>
-                        </a>
-                        {/*
-                                                            <li><a className="modal-trigger" href="#policyAddModal">Add Policy</a></li>
-                                    <li><a className="modal-trigger" href="#claimFileModal">File Claim</a></li>*/}
-                        <ul className="right">
-                            { this.props.currentUser ?
-                                <div>
-                                    <li><AccountsUIWrapper/></li>
-                                </div> : <li><AccountsUIWrapper/></li>
-                            }
-                        </ul>
-                    </div>
-                </nav>
-                <div id="policyAddModal" className="modal">
-                    <div className="modal-content">
-                        <PolicyAddPage/>
+            <nav>
+                <div className="nav-wrapper container">
+                    <a className="brand-logo left" href="/">
+                        <div className="valign-wrapper">
+                            <img src="https://static.wixstatic.com/media/0a69bd_7cca552ce8524e90915bd9fce092b812~mv2.png/v1/fill/w_496,h_486,al_c,usm_2.00_1.00_0.00/0a69bd_7cca552ce8524e90915bd9fce092b812~mv2.png" />
+                            <span>Umbrella Coin</span>
+                        </div>
+                    </a>
+                    <div className="right">
+                        <AccountsWrapper />
                     </div>
                 </div>
-                <div id="claimFileModal" className="modal">
-                    <div className="modal-content">
-                        <ClaimFilePage/>
-                    </div>
-                </div>
-            </div>
+            </nav>
         );
     }
 }
-
-Nav.propTypes = {
-    currentUser: PropTypes.object,
-};
-
-export default createContainer(() => {
-    return {
-        currentUser: Meteor.user(),
-    };
-}, Nav);
