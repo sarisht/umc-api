@@ -7,7 +7,7 @@ import { Policies } from './policies';
 export const VOTE_YES = 0;
 export const VOTE_NO = 1;
 export const VOTE_NMI = 2;
-export const VOTE_TYPES_MAX = 10;
+const VOTE_TYPES_MAX = 10;
 
 export const Claims = new Mongo.Collection('claims');
 
@@ -19,24 +19,15 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'claims.insert'(policyId, ask) {
-        check(policyId, String);
+    'claims.insert'(ask) {
         check(ask, Match.Integer)
 
         // Ensure user logged in
-        if (!this.userId) {
-            throw new Meteor.Error('not-authorized');
-        }
-
-        // Ensure user owns active policy
-        const policy = Policies.findOne(policyId);
-        if (policy.owner !== this.userId || !policy.active)
+        if (!this.userId)
             throw new Meteor.Error('not-authorized');
 
         // Insert claim
         Claims.insert({
-            policyId,
-            policyName: policy.name,
             active: true,
             ask,
             owner: this.userId,
@@ -75,9 +66,6 @@ Meteor.methods({
         votes[this.userId] = voteNew;
         voteCounts[voteNew]++;
 
-        console.log(votes);
-        console.log(voteCounts);
-
         // Update claim
         Claims.update(claimId, { $set: { votes, voteCounts } });
     },
@@ -89,14 +77,6 @@ Meteor.methods({
         const claim = Claims.findOne(claimId);
         if (claim.owner !== this.userId)
             throw new Meteor.Error('not-authorized');
-
-        // Claim shouldn't be active if policy isn't
-        if (active) {
-            const policy = Policies.findOne(claim.policyId);
-            if (!policy.active) {
-                throw new Meteor.Error('not-authorized');
-            }
-        }
 
         // Update claim
         Claims.update(claimId, { $set: { active } });

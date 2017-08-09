@@ -3,6 +3,8 @@ import React from 'react';
 import classnames from 'classnames';
 import { createContainer } from 'meteor/react-meteor-data';
 
+import ClaimDiscussionCard from '../components/ClaimDiscussionCard.jsx';
+
 import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from "../../api/claims.js";
 
 class ClaimPage extends React.Component {
@@ -32,18 +34,31 @@ class ClaimPage extends React.Component {
         );
     }
 
+    renderDetailCard() {
+        return (
+            <div className="card">
+                <div className="card-content">
+                    <div className="row">
+                        <div className="col s12">
+                            <h4>Auto Claim</h4>
+                            <p>{this.props.claim.ask} UMC</p>
+                        </div>
+                        {this.props.currentUser._id !== this.props.claim.owner ? this.renderVoteButtons() : null}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     renderLoaded() {
         return (
             <div className="section">
-                <div className="card">
-                    <div className="card-content">
-                        <div className="row">
-                            <div className="col s12">
-                                <h4>Auto Claim</h4>
-                                <p>{this.props.claim.ask} UMC</p>
-                            </div>
-                            {this.props.currentUser._id !== this.props.claim.owner ? this.renderVoteButtons() : null}
-                        </div>
+                <div className="row">
+                    <div className="col s12 m6">
+                        {this.renderDetailCard()}
+                    </div>
+                    <div className="col s12 m6">
+                        <ClaimDiscussionCard claim={this.props.claim} />
                     </div>
                 </div>
             </div>

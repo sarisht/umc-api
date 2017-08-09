@@ -12,7 +12,7 @@ export default class PolicyCard extends React.Component {
 
     render() {
         return (
-            <div className="policy-card medium">
+            <div className="policy-card card medium">
                 <div className="card-header">
                     <div className="card-title">My Policy<i className="material-icons right">mode_edit</i></div>
                     <p className="text-secondary">Created July 31, 2017</p>

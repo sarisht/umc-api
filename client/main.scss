@@ -2,115 +2,111 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 // Palette
-$primary-color-dark: #303F9F;
-$primary-color: #3F51B5 !default;
-$primary-color-light: #C5CAE9;
-$primary-color-text: #FFFFFF;
-$accent-color: #ffc107;
-$primary-text-color: #212121;
-$secondary-text-color: #757575;
-$divider-color: #BDBDBD;
-$tertiary-color: #009688;
+$accent-color: #ffc107 !default;
+$background-color: #edecec !default;
+$divider-color: #bdbdbd !default;
+$primary-color: #3f51b5 !default;
+$primary-color-dark: #303f9f !default;
+$primary-color-light: #c5cae9 !default;
+$primary-color-text: #ffffff !default;
+$primary-text-color: #212121 !default;
+$secondary-color: $accent-color !default;
+$secondary-text-color: #757575 !default;
+$tertiary-color: #009688 !default;
+$tertiary-color-text: white !default;
 
 // Numbers
-$darken-percentage: 8%;
-
-// Materialize colors
-$secondary-color: $accent-color !default;
-$footer-bg-color: $primary-color;
-$footer-copyright-bg-color: $primary-color-dark;
+$darken-percentage: 8% !default;
 
 // Card colors
 $card-bg-color: white !default;
-$card-link-color: white !default;
+$card-link-color: $primary-text-color !default;
 
-/* Materialize collection colors */
-$collection-bg-color: white !default;
-$collection-border-color: $divider-color;
-$collection-link-color: black !default;
-$collection-hover-bg-color: darken($card-bg-color, $darken-percentage);
+// Collection colors
+$collection-bg-color: $card-bg-color !default;
+$collection-border-color: $divider-color !default;
+$collection-hover-bg-color: darken($collection-bg-color, $darken-percentage) !default;
+$collection-link-color: $card-link-color !default;
 
+// Footer colors
+$footer-copyright-bg-color: $primary-color-dark !default;
+
+// Update Materialize
 @import "../imports/sass/materialize/materialize.scss";
 
 // Body
 body {
-  background: #edecec;
+  background: $background-color;
+  color: $primary-text-color;
 }
 
 // Cards
 .card {
-  color: white;
+  // Card action
+  .card-action {
+    border-top: 1px solid $divider-color
+  }
 
+  // Card header
   .card-header {
     @extend .card-content;
 
-    border-bottom-right-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
     height: 105px;
     overflow: visible !important;
     position: relative !important;
   }
-}
 
-.policy-card, .claim-list-card {
-  @extend .card;
-  color: white;
-
-  .card-header {
-    background: darken($primary-color, $darken-percentage);
-  }
-}
-
-.policy-card {
-  background: $primary-color;
-
-  h1 {
-    font-weight: bold;
-    margin-bottom: 0;
-    opacity: 0.87;
-  }
-  .policy-card-stats {
-    padding-top: 8px;
-  }
-}
-
-.claim-list-card .collection {
-  border: none;
-  border-bottom: 1px solid $collection-border-color;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-
-  .avatar {
-    min-height: 0 !important;
-
-    i.circle {
-      background: $primary-color !important;
-    }
-  }
-}
-
-.claim-card {
-  @extend .card;
-
-  background: white;
-  color: black;
-
-  .card-header {
+  // Claim card
+  &.claim-card .card-header {
     background: $tertiary-color;
     text-align: center;
 
     i {
-      color: white;
+      color: $tertiary-color-text;
       font-size: 50px;
     }
   }
 
-  .card-action {
-    border-top: 1px solid $divider-color;
-    background: white;
+  // Claim list card and policy card header
+  &.claim-list-card .card-header, &.policy-card .card-header {
+    background: darken($primary-color, $darken-percentage);
+    color: $primary-color-text;
+  }
 
-    a {
-      color: black !important;
+  // Claim list card
+  &.claim-list-card .collection {
+    border: none;
+    height: 295px;
+    margin-top: 0;
+    overflow: scroll;
+
+    .avatar {
+      min-height: 0 !important;
+
+      i.circle {
+        background: $primary-color !important;
+      }
+    }
+
+    .collection-item {
+      border-bottom: 1px solid $collection-border-color;
+    }
+  }
+
+  // Policy card
+  &.policy-card {
+    background: $primary-color;
+    color: $primary-color-text;
+
+    .policy-card-stats {
+      padding-top: 8px;
+
+      h1 {
+        font-weight: bold;
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -118,8 +114,8 @@ body {
 // Footer
 .flexbox-wrapper {
   display: flex !important;
-  min-height: 100vh !important;
   flex-direction: column !important;
+  min-height: 100vh !important;
 }
 
 main {
@@ -127,11 +123,11 @@ main {
 }
 
 .page-footer a {
-  color: white !important;
+  color: $primary-color-text !important;
 }
 
 // Headers
-h4 {
+h1, h4 {
   opacity: 0.87;
 }
 
@@ -140,6 +136,7 @@ h4 {
   a:hover {
     background-color: transparent !important;
   }
+
   input {
     border-bottom: 1px solid #aaa !important;
     box-shadow: none !important;
@@ -148,9 +145,11 @@ h4 {
 
 // Nav
 .nav-wrapper .brand-logo img {
-  margin-top: -6px;
   height: 64px;
+  margin-top: -6px;
 }
 
 // Text
-.text-secondary { opacity: 0.54 }
+.text-secondary {
+  opacity: 0.54;
+}

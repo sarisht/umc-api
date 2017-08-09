@@ -3,7 +3,7 @@ import React from 'react';
 export default class ClaimCard extends React.Component {
     render() {
         return (
-            <div className="claim-card">
+            <div className="claim-card card">
                 <div className="card-header">
                     <span><i className="material-icons circle">directions_car</i></span>
                 </div>

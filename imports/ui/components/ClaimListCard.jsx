@@ -16,14 +16,14 @@ export default class ClaimListCard extends React.Component {
     render() {
         return (
             <div>
-                <div className="claim-list-card medium">
+                <div className="claim-list-card card medium">
+                    <div className="card-header">
+                        <a href="#claimFileModal" className="modal-trigger btn-floating halfway-fab waves-effect waves-light">
+                            <i className="material-icons">add</i>
+                        </a>
+                        <div className="card-title">My Claims</div>
+                    </div>
                     <ul className="collection">
-                        <div className="card-header">
-                            <a href="#claimFileModal" className="modal-trigger btn-floating halfway-fab waves-effect waves-light">
-                                <i className="material-icons">add</i>
-                            </a>
-                            <div className="card-title">My Claims</div>
-                        </div>
                         {this.props.claims.map(this.renderClaim)}
                     </ul>
                 </div>
