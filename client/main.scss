@@ -58,6 +58,26 @@ body {
     position: relative !important;
   }
 
+  // Collection
+  .collection {
+    border: none;
+    margin-top: 0;
+    overflow: scroll;
+
+    .avatar {
+      min-height: 0 !important;
+
+      i.circle {
+        background: $primary-color !important;
+        font-size: 24px;
+      }
+    }
+
+    .collection-item {
+      border-bottom: 1px solid $collection-border-color;
+    }
+  }
+
   // Claim card
   &.claim-card .card-header {
     background: $tertiary-color;
@@ -77,21 +97,23 @@ body {
 
   // Claim list card
   &.claim-list-card .collection {
-    border: none;
     height: 295px;
-    margin-top: 0;
-    overflow: scroll;
+  }
 
-    .avatar {
-      min-height: 0 !important;
-
-      i.circle {
-        background: $primary-color !important;
-      }
+  // Discussion card
+  &.discussion-card .collection {
+    .collection-item {
+      padding: 15px 72px;
     }
 
-    .collection-item {
-      border-bottom: 1px solid $collection-border-color;
+    .discussion-form {
+      border-bottom: none;
+      padding: 36px 10px 0 72px;
+
+      textarea {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 
