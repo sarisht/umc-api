@@ -54,10 +54,10 @@ class ClaimPage extends React.Component {
         return (
             <div className="section">
                 <div className="row">
-                    <div className="col s12">
+                    <div className="col s12 l6">
                         {this.renderDetailCard()}
                     </div>
-                    <div className="col s12">
+                    <div className="col s12 l6">
                         <ClaimDiscussionCard claim={this.props.claim} />
                     </div>
                 </div>

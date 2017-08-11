@@ -25,10 +25,10 @@ class HomePage extends Component {
             <div className="section">
                 <div className="row">
                     <h4 className="col s12">Manage Data</h4>
-                    <div className="col s12 m8">
+                    <div className="col s12 l8">
                         <PolicyCard policy={this.props.policy} />
                     </div>
-                    <div className="col s12 m4">
+                    <div className="col s12 l4">
                         <ClaimListCard claims={this.props.claims} />
                     </div>
                 </div>

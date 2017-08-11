@@ -3,7 +3,7 @@
 
 // Palette
 $accent-color: #ffc107 !default;
-$background-color: #edecec !default;
+$background-color: #ededed !default;
 $divider-color: #bdbdbd !default;
 $primary-color: #3f51b5 !default;
 $primary-color-dark: #303f9f !default;
@@ -101,18 +101,29 @@ body {
   }
 
   // Discussion card
-  &.discussion-card .collection {
-    .collection-item {
-      padding: 15px 72px;
-    }
-
-    .discussion-form {
-      border-bottom: none;
-      padding: 36px 10px 0 72px;
+  &.discussion-card {
+    .card-header {
+      height: auto;
+      padding-bottom: 0;
 
       textarea {
-        margin: 0;
-        padding: 0;
+        display: block;
+        padding: 0px;
+      }
+    }
+
+    .collection {
+      .collection-item {
+        background: darken($collection-bg-color, $darken-percentage / 2);
+        padding: 16px 16px 16px 72px;
+      }
+
+      .discussion-post-content {
+        padding-right: 36px;
+      }
+
+      .text-secondary {
+        font-size: 14px;
       }
     }
   }
