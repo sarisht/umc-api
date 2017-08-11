@@ -89,8 +89,10 @@ body {
     }
   }
 
-  // Claim list card and policy card header
-  &.claim-list-card .card-header, &.policy-card .card-header {
+  // Card headers with darkened primary colors
+  &.claim-detail-card .card-header,
+  &.claim-list-card .card-header,
+  &.policy-card .card-header {
     background: darken($primary-color, $darken-percentage);
     color: $primary-color-text;
   }
@@ -103,7 +105,7 @@ body {
   // Discussion card
   &.discussion-card {
     .card-header {
-      height: auto;
+      padding-top: 48px;
       padding-bottom: 0;
 
       textarea {
