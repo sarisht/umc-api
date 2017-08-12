@@ -72,7 +72,7 @@ class ClaimPage extends React.Component {
                         </div>
                     </div>
                     <div className="col s12 l4">
-                        {this.props.currentUser._id !== this.props.claim.owner ? this.renderVoteButtons() : null}
+                        {(this.props.currentUser && this.props.currentUser._id !== this.props.claim.owner) ? this.renderVoteButtons() : null}
                         <ClaimEvidenceCard claim={this.props.claim} />
                         <ClaimEvidenceCard claim={this.props.claim} />
                     </div>
