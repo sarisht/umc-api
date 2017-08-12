@@ -109,6 +109,14 @@ body {
   &.claim-detail-card {
     background: $primary-color;
     color: $primary-color-text;
+
+    .card-header {
+      height: auto;
+    }
+
+    .claim-description {
+      margin-top: 8px;
+    }
   }
 
   // Claim list card

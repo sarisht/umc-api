@@ -9,6 +9,10 @@ import StatCard from '../components/StatCard.jsx';
 import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from "../../api/claims.js";
 
 class ClaimPage extends React.Component {
+    isOwner() {
+        return this.props.currentUser && this.props.currentUser._id !== this.props.claim.owner;
+    }
+
     handleVoteChange(vote, event) {
         Meteor.call('claims.vote', this.props.claim._id, vote);
     }
@@ -43,10 +47,19 @@ class ClaimPage extends React.Component {
     renderDetailCard() {
         return (
             <div className="claim-detail-card card">
+                <div className="card-header">
+                    <span className="card-title">
+                        My Van Was Rear-Ended
+                        {this.isOwner() ? <i className="material-icons right">mode_edit</i> : null}
+                    </span>
+                </div>
                 <div className="card-content">
-                    <span className="card-title">Auto Claim</span>
-                    <p className="text-secondary">Added 8/20/2017</p>
-                    <p>In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
+                    <p className="text-secondary right">Aug 20</p>
+                    <div>
+                        <span>Gingerbread Man</span>
+                        <p className="text-secondary">cd2a3d9f938e13cd947ec05abc7fe734df8dd826</p>
+                    </div>
+                    <p className="claim-description">In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
                 </div>
             </div>
         );
@@ -75,7 +88,7 @@ class ClaimPage extends React.Component {
                     <div className="col s12 l4">
                         <div className="row">
                             <div className="col s12">
-                                {(this.props.currentUser && this.props.currentUser._id !== this.props.claim.owner) ? this.renderVoteButtons() : null}
+                                {this.isOwner() ? this.renderVoteButtons() : null}
                             </div>
                             <div className="col s12">
                                 <ClaimEvidenceCard claim={this.props.claim} />
