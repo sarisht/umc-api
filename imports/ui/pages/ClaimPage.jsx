@@ -27,31 +27,30 @@ class ClaimPage extends React.Component {
 
     renderVoteButtons() {
         return (
-            <div className="col s12">
-                <h5>How do you vote?</h5>
-                <form>
-                    {this.renderVoteButton('Yes', VOTE_YES)}
-                    {this.renderVoteButton('No', VOTE_NO)}
-                    {this.renderVoteButton('Needs More Information', VOTE_NMI)}
-                </form>
+            <div className="claim-vote-card card">
+                <div className="card-content">
+                    <h5>How do you vote?</h5>
+                    <form>
+                        {this.renderVoteButton('Yes', VOTE_YES)}
+                        {this.renderVoteButton('No', VOTE_NO)}
+                        {this.renderVoteButton('Needs More Information', VOTE_NMI)}
+                    </form>
+                </div>
             </div>
         );
     }
 
     renderDetailCard() {
         return (
-            <div className="claim-detail-card card">
-                <div className="card-header">
-                    <span className="card-title">Auto Claim</span>
-                    <p className="text-secondary">Added 8/20/2017</p>
-                </div>
-                <div className="card-content">
-                    <div className="row">
-                        <div className="col s12">
-                            <p>{this.props.claim.ask} UMC</p>
-                            <p>In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
-                        </div>
-                        {this.props.currentUser._id !== this.props.claim.owner ? this.renderVoteButtons() : null}
+            <div>
+                <div className="claim-detail-card card">
+                    <div className="card-header">
+                        <span className="card-title">Auto Claim</span>
+                        <p className="text-secondary">Added 8/20/2017</p>
+                    </div>
+                    <div className="card-content">
+                        <p>{this.props.claim.ask} UMC, Add icon here<br/><br/></p>
+                        <p>In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
                     </div>
                 </div>
             </div>
@@ -73,6 +72,7 @@ class ClaimPage extends React.Component {
                         </div>
                     </div>
                     <div className="col s12 l4">
+                        {this.props.currentUser._id !== this.props.claim.owner ? this.renderVoteButtons() : null}
                         <ClaimEvidenceCard claim={this.props.claim} />
                         <ClaimEvidenceCard claim={this.props.claim} />
                     </div>

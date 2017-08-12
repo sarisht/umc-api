@@ -31,6 +31,9 @@ $collection-link-color: $card-link-color !default;
 // Footer colors
 $footer-copyright-bg-color: $primary-color-dark !default;
 
+// Form colors
+$radio-empty-color: $tertiary-color-text !default;
+
 // Update Materialize
 @import "../imports/sass/materialize/materialize.scss";
 
@@ -97,16 +100,32 @@ body {
     color: $primary-color-text;
   }
 
+  // Claim detail card
+  &.claim-detail-card {
+    background: $primary-color;
+    color: $primary-color-text;
+  }
+
   // Claim list card
   &.claim-list-card .collection {
     height: 295px;
   }
 
+  // Claim vote card
+  &.claim-vote-card {
+    background: $tertiary-color;
+    color: $tertiary-color-text;
+
+    label {
+      color: rgba(255, 255, 255, 0.87); // Similar to tertiary-color-text
+    }
+  }
+
   // Discussion card
   &.discussion-card {
     .card-header {
-      padding-top: 48px;
-      padding-bottom: 0;
+      height: auto;
+      padding: 48px 16px 0 72px;
 
       textarea {
         display: block;
