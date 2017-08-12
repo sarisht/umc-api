@@ -100,6 +100,11 @@ body {
     color: $primary-color-text;
   }
 
+  // Card title
+  .card-title {
+    margin-bottom: 4px !important;
+  }
+
   // Claim detail card
   &.claim-detail-card {
     background: $primary-color;
@@ -160,6 +165,31 @@ body {
       h1 {
         font-weight: bold;
         margin-bottom: 0;
+      }
+    }
+  }
+
+  // Stat card
+  &.stat-card {
+    text-align: center;
+
+    .card-header {
+      padding: 0;
+    }
+
+    .stat-content {
+      text-align: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 60px;
+      font-weight: bold;
+      height: 66px;
+      margin: 0;
+
+      i {
+        font-size: 60px;
       }
     }
   }

@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import classnames from 'classnames';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import ClaimEvidenceCard from '../components/ClaimEvidenceCard.jsx';
 import ClaimDiscussionCard from '../components/ClaimDiscussionCard.jsx';
+import StatCard from '../components/StatCard.jsx';
 
 import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from "../../api/claims.js";
 
@@ -42,16 +42,11 @@ class ClaimPage extends React.Component {
 
     renderDetailCard() {
         return (
-            <div>
-                <div className="claim-detail-card card">
-                    <div className="card-header">
-                        <span className="card-title">Auto Claim</span>
-                        <p className="text-secondary">Added 8/20/2017</p>
-                    </div>
-                    <div className="card-content">
-                        <p>{this.props.claim.ask} UMC, Add icon here<br/><br/></p>
-                        <p>In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
-                    </div>
+            <div className="claim-detail-card card">
+                <div className="card-content">
+                    <span className="card-title">Auto Claim</span>
+                    <p className="text-secondary">Added 8/20/2017</p>
+                    <p>In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
                 </div>
             </div>
         );
@@ -66,15 +61,29 @@ class ClaimPage extends React.Component {
                             <div className="col s12">
                                 {this.renderDetailCard()}
                             </div>
+                            <div className="col s6">
+                                <StatCard caption="UMC Ask" metric={this.props.claim.ask} />
+                            </div>
+                            <div className="col s6">
+                                <StatCard caption="Auto Category" icon="directions_car" />
+                            </div>
                             <div className="col s12">
                                 <ClaimDiscussionCard claim={this.props.claim} />
                             </div>
                         </div>
                     </div>
                     <div className="col s12 l4">
-                        {(this.props.currentUser && this.props.currentUser._id !== this.props.claim.owner) ? this.renderVoteButtons() : null}
-                        <ClaimEvidenceCard claim={this.props.claim} />
-                        <ClaimEvidenceCard claim={this.props.claim} />
+                        <div className="row">
+                            <div className="col s12">
+                                {(this.props.currentUser && this.props.currentUser._id !== this.props.claim.owner) ? this.renderVoteButtons() : null}
+                            </div>
+                            <div className="col s12">
+                                <ClaimEvidenceCard claim={this.props.claim} />
+                            </div>
+                            <div className="col s12">
+                                <ClaimEvidenceCard claim={this.props.claim} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
