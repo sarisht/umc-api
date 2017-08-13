@@ -110,12 +110,29 @@ body {
     background: $primary-color;
     color: $primary-color-text;
 
+    .avatar {
+      padding-left: 57px;
+      position: relative;
+
+      i {
+        background: white;
+        color: $primary-color;
+        height: 42px;
+        width: 42px;
+        line-height: 42px;
+        font-style: 24px;
+        position: absolute;
+        left: 0;
+        text-align: center;
+      }
+    }
+
     .card-header {
       height: auto;
     }
 
     .claim-description {
-      margin-top: 8px;
+      margin-top: 12px;
     }
   }
 

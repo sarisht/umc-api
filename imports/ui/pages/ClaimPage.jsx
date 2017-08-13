@@ -10,7 +10,7 @@ import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from "../../api/claims.js";
 
 class ClaimPage extends React.Component {
     isOwner() {
-        return this.props.currentUser && this.props.currentUser._id !== this.props.claim.owner;
+        return this.props.currentUser && this.props.currentUser._id === this.props.claim.owner;
     }
 
     handleVoteChange(vote, event) {
@@ -55,7 +55,8 @@ class ClaimPage extends React.Component {
                 </div>
                 <div className="card-content">
                     <p className="text-secondary right">Aug 20</p>
-                    <div>
+                    <div className="avatar">
+                        <i className="material-icons circle">person</i>
                         <span>Gingerbread Man</span>
                         <p className="text-secondary">cd2a3d9f938e13cd947ec05abc7fe734df8dd826</p>
                     </div>
@@ -88,7 +89,7 @@ class ClaimPage extends React.Component {
                     <div className="col s12 l4">
                         <div className="row">
                             <div className="col s12">
-                                {this.isOwner() ? this.renderVoteButtons() : null}
+                                {!this.isOwner() ? this.renderVoteButtons() : null}
                             </div>
                             <div className="col s12">
                                 <ClaimEvidenceCard claim={this.props.claim} />
