@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
-import { Policies } from './policies';
-
 export const VOTE_YES = 0;
 export const VOTE_NO = 1;
 export const VOTE_NMI = 2;
