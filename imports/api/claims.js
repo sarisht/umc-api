@@ -8,6 +8,7 @@ export const VOTE_YES = 0;
 export const VOTE_NO = 1;
 export const VOTE_NMI = 2;
 export const VOTE_FRAUD = 3;
+export const VOTE_INAPPROPRIATE = 4;
 const VOTE_TYPES_MAX = 10;
 
 export const Claims = new Mongo.Collection('claims');
@@ -43,7 +44,7 @@ Meteor.methods({
         check(voteNew, Match.Integer);
 
         // Check possible vote values
-        if (![VOTE_YES, VOTE_NO, VOTE_NMI, VOTE_FRAUD].includes(voteNew))
+        if (![VOTE_YES, VOTE_NO, VOTE_NMI, VOTE_FRAUD, VOTE_INAPPROPRIATE].includes(voteNew))
             throw new Meteor.Error('invalid-argument');
 
         // Ensure user logged in

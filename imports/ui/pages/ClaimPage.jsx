@@ -6,7 +6,8 @@ import ClaimEvidenceCard from '../components/ClaimEvidenceCard.jsx';
 import ClaimDiscussionCard from '../components/ClaimDiscussionCard.jsx';
 import StatCard from '../components/StatCard.jsx';
 
-import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI, VOTE_FRAUD } from "../../api/claims.js";
+import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI, VOTE_FRAUD, VOTE_INAPPROPRIATE } from "../../api/claims.js";
+import {VOTE_INNAPROPRIATE} from "../../api/claims";
 
 class ClaimPage extends React.Component {
     isOwner() {
@@ -38,7 +39,9 @@ class ClaimPage extends React.Component {
                         {this.renderVoteButton('Yes', VOTE_YES)}
                         {this.renderVoteButton('No', VOTE_NO)}
                         {this.renderVoteButton('Needs More Information', VOTE_NMI)}
+                        <div className="divider" />
                         {this.renderVoteButton('Fraudulent', VOTE_FRAUD)}
+                        {this.renderVoteButton('Inappropriate', VOTE_INAPPROPRIATE)}
                     </form>
                 </div>
             </div>
