@@ -32,8 +32,10 @@
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/builtins.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/multiple.done.before.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/preamble.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.18.1/web.browser/export.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/uncaught.hook.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/domrange.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.18.1/web.browser/moment.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/timeout.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/uncaught.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/passing.js" />
@@ -412,8 +414,10 @@
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/builtins.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/multiple.done.before.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/preamble.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.18.1/web.browser/export.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/uncaught.hook.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/domrange.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.18.1/web.browser/moment.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/timeout.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/uncaught.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/integration/fixtures/passing.js" />

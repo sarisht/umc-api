@@ -1,21 +1,62 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
+import { moment } from "meteor/momentjs:moment";
 
-export default class ClaimDiscussionCard extends React.Component {
-    renderPost() {
+import { Posts } from "../../api/posts.js";
+
+class ClaimDiscussionCard extends React.Component {
+    handleSubmit(event) {
+        event.preventDefault();
+
+        // Get input
+        const message = ReactDOM.findDOMNode(this.refs.messageInput).value.trim();
+
+        // Insert post
+        Meteor.call('posts.insert', this.props.claim._id, message);
+
+        // Reset input
+        ReactDOM.findDOMNode(this.refs.messageInput).value = '';
+    }
+
+    renderPost(post) {
         return (
-            <li className="collection-item avatar">
+            <li key={post._id} className="collection-item avatar">
                 <i className="material-icons circle">person</i>
-                <span className="title">Gingerbread Man<span className="text-secondary right">Aug 20</span></span>
-                <p className="text-secondary">cd2a3d9f938e13cd947ec05abc7fe734df8dd826</p>
-                <p className="discussion-post-content">In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
+                <span className="title">
+                    Gingerbread Man
+                    <span className="text-secondary right">{moment(post.createdAt).format('MMM D')}</span>
+                </span>
+                <p className="text-secondary">{post.userWallet}</p>
+                <p className="discussion-post-content">{post.message}</p>
             </li>
         );
     }
 
-    renderForm() {
+    renderEmptyPosts() {
         return (
-            <form>
-                <textarea placeholder="Join the discussion" className="materialize-textarea" />
+            <li className="collection-item">
+                <span className="text-secondary">No posts yet.</span>
+            </li>
+        );
+    }
+
+    renderPosts() {
+        return (
+            <ul className="collection">
+                {this.props.posts.length === 0 ? this.renderEmptyPosts() : this.props.posts.map(this.renderPost)}
+            </ul>
+        );
+    }
+
+    renderForm() {
+        const disabled = Meteor.userId() ? null : "disabled";
+        const placeholder = disabled ? "Sign in to join the discussion" : "Join the discussion";
+
+        return (
+            <form onSubmit={this.handleSubmit.bind(this)}>
+                <input type="text" ref="messageInput" placeholder={placeholder} disabled={disabled} />
             </form>
         );
     }
@@ -26,11 +67,7 @@ export default class ClaimDiscussionCard extends React.Component {
                 <div className="card-header">
                     {this.renderForm()}
                 </div>
-                <ul className="collection">
-                    {this.renderPost()}
-                    {this.renderPost()}
-                    {this.renderPost()}
-                </ul>
+                {this.renderPosts()}
             </div>
         );
     }
@@ -38,4 +75,13 @@ export default class ClaimDiscussionCard extends React.Component {
 
 ClaimDiscussionCard.propTypes = {
     claim: React.PropTypes.object.isRequired,
+    posts: React.PropTypes.array,
 };
+
+export default createContainer((props) => {
+    Meteor.subscribe('posts', props.claim._id);
+
+    return {
+        posts: Posts.find({ claimId: props.claim._id }, { sort: { createdAt: -1 } }).fetch(),
+    };
+}, ClaimDiscussionCard);

@@ -93,7 +93,7 @@ class ClaimPage extends React.Component {
                     <div className="col s12 l4">
                         <div className="row">
                             <div className="col s12">
-                                {!this.isOwner() ? this.renderVoteButtons() : null}
+                                {(Meteor.userId() && !this.isOwner()) ? this.renderVoteButtons() : null}
                             </div>
                             <div className="col s12">
                                 <ClaimEvidenceCard claim={this.props.claim} />

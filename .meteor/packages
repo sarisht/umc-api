@@ -26,3 +26,4 @@ fourseven:scss@3.13.0
 materialize:materialize
 ethereum:web3
 dynamic-import
+momentjs:moment
