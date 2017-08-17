@@ -13,6 +13,12 @@ export default class ClaimListCard extends React.Component {
         );
     }
 
+    renderEmpty() {
+        return (
+            <li className="collection-item text-secondary">No claims</li>
+        );
+    }
+
     render() {
         return (
             <div>
@@ -24,7 +30,7 @@ export default class ClaimListCard extends React.Component {
                         <div className="card-title">My Claims</div>
                     </div>
                     <ul className="collection">
-                        {this.props.claims.map(this.renderClaim)}
+                        {this.props.claims.length === 0 ? this.renderEmpty() : this.props.claims.map(this.renderClaim)}
                     </ul>
                 </div>
                 <ClaimFileModal/>
