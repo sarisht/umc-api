@@ -189,6 +189,10 @@ body {
     background: $primary-color;
     color: $primary-color-text;
 
+    .card-header i {
+      cursor: pointer;
+    }
+
     .policy-card-stats {
       padding-top: 8px;
 
@@ -243,6 +247,11 @@ main {
 // Headers
 h1, h4 {
   opacity: 0.87;
+}
+
+// iframes
+iframe {
+  border: 0;
 }
 
 // Login

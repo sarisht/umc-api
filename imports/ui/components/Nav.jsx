@@ -13,9 +13,11 @@ export default class Nav extends React.Component {
                             <span>Umbrella Coin</span>
                         </div>
                     </a>
-                    <div className="right">
-                        <AccountsWrapper />
-                    </div>
+                    <ul className="right">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/how-it-works">How It Works</a></li>
+                        <li><AccountsWrapper /></li>
+                    </ul>
                 </div>
             </nav>
         );
