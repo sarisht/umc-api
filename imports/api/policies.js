@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
+export const PAYOUT_MULTIPLIER = 5;
+
 export const Policies = new Mongo.Collection('policies');
 
 if (Meteor.isServer) {
@@ -12,8 +14,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'policies.insert'(name, amount) {
-        check(name, String);
+    'policies.insert'(amount) {
         check(amount, Match.Integer);
 
         // Ensure user logged in
@@ -21,10 +22,17 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
+        // TODO take UMC
+
+        // Calculate policy data
+        const payoutMax = amount * PAYOUT_MULTIPLIER;
+
         // Insert policy
         Policies.insert({
-            name,
             amount,
+            amountInitial: amount,
+            payoutMax,
+            payoutRemaining: payoutMax,
             active: true,
             owner: this.userId,
             createdAt: new Date(),
@@ -35,11 +43,20 @@ Meteor.methods({
 
         // Ensure user owns policy
         const policy = Policies.findOne(policyId);
-        if (policy.owner !== this.userId) {
+        if (policy.owner !== this.userId)
             throw new Meteor.Error('not-authorized');
-        }
+
+        // Ensure change
+        if (policy.active === active)
+            throw new Meteor.Error('not-authorized');
+
+        // TODO charge UMC fee
+        // TODO return remaining UMC
 
         // Update policy
-        Policies.update(policyId, { $set: { active } });
+        Policies.update(policyId, { $set: {
+            active,
+            createdAt: active ? new Date() : policy.createdAt, // Reset policy create date
+        } });
     },
 });

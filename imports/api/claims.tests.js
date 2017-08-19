@@ -31,7 +31,7 @@ if (Meteor.isServer) {
 
                 // Insert policy
                 const insertPolicy = Meteor.server.method_handlers['policies.insert'];
-                insertPolicy.apply({ userId }, ["Test", 100]);
+                insertPolicy.apply({ userId }, [100]);
                 const policyId = Policies.findOne()._id;
 
                 // Insert claim
