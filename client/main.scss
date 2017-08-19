@@ -189,8 +189,20 @@ body {
     background: $primary-color;
     color: $primary-color-text;
 
-    .card-header i {
+    .btn-flat {
+      color: $primary-color-text;
+    }
+
+    i {
       cursor: pointer;
+    }
+
+    .edit-policy {
+      padding: 36px;
+    }
+
+    .no-policy {
+      padding: 48px;
     }
 
     .policy-card-stats {
