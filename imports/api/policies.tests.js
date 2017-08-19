@@ -37,21 +37,32 @@ if (Meteor.isServer) {
                 assert.equal(policy.owner, userId);
 
                 // Get policy id
-                policyId = Policies.findOne()._id;
+                policyId = policy._id;
             });
 
-            it('can set active', () => {
+            it('can deactivate', () => {
                 // Ensure active
                 verifyActive(policyId, true);
 
                 // Set active to false
-                const setActive = Meteor.server.method_handlers['policies.setActive'];
+                const setActive = Meteor.server.method_handlers['policies.deactivate'];
                 setActive.apply({ userId }, [policyId, false]);
                 verifyActive(policyId, false);
+            });
 
-                // Set active to true
-                setActive.apply({ userId }, [policyId, true]);
-                verifyActive(policyId, true);
+            it('can add funds', () => {
+                const amountAdditional = 150;
+
+                // Add funds
+                const addFunds = Meteor.server.method_handlers['policies.addFunds'];
+                addFunds.apply({ userId }, [policyId, amountAdditional]);
+
+                // Verify policy
+                const policy = Policies.findOne(policyId);
+                assert.equal(policy.amount, amount + amountAdditional);
+                assert.equal(policy.amountInitial, amount + amountAdditional);
+                assert.equal(policy.payoutMax, (amount + amountAdditional) * PAYOUT_MULTIPLIER);
+                assert.equal(policy.payoutRemaining, (amount + amountAdditional) * PAYOUT_MULTIPLIER);
             });
         });
     });

@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 import { moment } from "meteor/momentjs:moment";
 
 export default class PolicyCard extends React.Component {
@@ -9,6 +11,31 @@ export default class PolicyCard extends React.Component {
 
     handleEdit() {
         this.setState({ inEdit: !this.state.inEdit });
+    }
+
+    handleDelete() {
+        Meteor.call('policies.deactivate', this.props.policy._id, false);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        // Get input
+        const amount = parseInt(ReactDOM.findDOMNode(this.refs.amountInput).value);
+        if (isNaN(amount) || amount <= 0)
+            return;
+
+        // Insert policy
+        if (!this.props.policy)
+            Meteor.call('policies.insert', amount);
+        else
+            Meteor.call('policies.addFunds', this.props.policy._id, amount);
+
+        // Reset state
+        this.setState({ inEdit: false });
+
+        // Reset input
+        ReactDOM.findDOMNode(this.refs.amountInput).value = '';
     }
 
     static renderMetric(metric, label) {
@@ -24,9 +51,9 @@ export default class PolicyCard extends React.Component {
         return (
             <div className="policy-card-stats card-content">
                 <div className="row">
-                    {PolicyCard.renderMetric(500, 'UMC Put In')}
-                    {PolicyCard.renderMetric(2500, 'UMC Max Payout')}
-                    {PolicyCard.renderMetric(2500, 'UMC Payout Remaining')}
+                    {PolicyCard.renderMetric(this.props.policy.amount, 'UMC Put In')}
+                    {PolicyCard.renderMetric(this.props.policy.payoutMax, 'UMC Max Payout')}
+                    {PolicyCard.renderMetric(this.props.policy.payoutRemaining, 'UMC Payout Remaining')}
                     {PolicyCard.renderMetric(120000, 'UMC Float')}
                 </div>
             </div>
@@ -40,14 +67,14 @@ export default class PolicyCard extends React.Component {
                     <i onClick={this.handleEdit.bind(this)} className="material-icons right">close</i>
                 </div>
                 <h2>Add funds or delete your policy for a fee.</h2>
-                <form>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="row">
                         <div className="input-field col s8">
-                            <input placeholder="Enter Additional Funds (UMC)" type="text" />
+                            <input ref="amountInput" placeholder="Enter Additional Funds (UMC)" type="text" />
                         </div>
                         <div className="input-field col s12">
-                            <button className="btn-large waves-effect waves-light" type="submit">Add Coverage</button>&nbsp;
-                            <button className="btn-flat btn-large">Delete Policy</button>
+                            <button type="submit" className="btn-large waves-effect waves-light">Add Coverage</button>&nbsp;
+                            <button onClick={this.handleDelete.bind(this)} className="btn-flat btn-large">Delete Policy</button>
                         </div>
                     </div>
                 </form>
@@ -59,10 +86,10 @@ export default class PolicyCard extends React.Component {
         return (
             <div className="no-policy card-content">
                 <h1>Add funds to get coverage.</h1>
-                <form>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="row">
                         <div className="input-field col s12 m6">
-                            <input placeholder="Enter Funds (UMC)" type="text" />
+                            <input ref="amountInput" placeholder="Enter Funds (UMC)" type="text" />
                         </div>
                         <div className="input-field col s12 m6">
                             <button className="btn waves-effect waves-light btn-large" type="submit">Get Covered</button>
@@ -85,13 +112,11 @@ export default class PolicyCard extends React.Component {
         if (!this.props.policy || this.state.inEdit)
             return null;
 
-        const editIcon = this.state.inEdit ? "close" : "mode_edit";
-
         return (
             <div className="card-header">
                 <div className="card-title">
-                    {this.state.inEdit ? "Edit My Policy" : "My Policy"}
-                    <i onClick={this.handleEdit.bind(this)} className="material-icons right">{editIcon}</i>
+                    My Policy
+                    <i onClick={this.handleEdit.bind(this)} className="material-icons right">mode_edit</i>
                 </div>
                 <p className="text-secondary">Created {moment(this.props.policy.createdAt).format('MMMM D, YYYY')}</p>
             </div>

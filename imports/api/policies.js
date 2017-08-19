@@ -18,9 +18,13 @@ Meteor.methods({
         check(amount, Match.Integer);
 
         // Ensure user logged in
-        if (!this.userId) {
+        if (!this.userId)
             throw new Meteor.Error('not-authorized');
-        }
+
+        // Ensure user doesn't have an active policy
+        const policy = Policies.findOne({ owner: this.userId, active: true })
+        if (policy)
+            throw new Meteor.Error('not-authorized');
 
         // TODO take UMC
 
@@ -38,7 +42,7 @@ Meteor.methods({
             createdAt: new Date(),
         });
     },
-    'policies.setActive'(policyId, active) {
+    'policies.deactivate'(policyId) {
         check(policyId, String);
 
         // Ensure user owns policy
@@ -46,17 +50,38 @@ Meteor.methods({
         if (policy.owner !== this.userId)
             throw new Meteor.Error('not-authorized');
 
-        // Ensure change
-        if (policy.active === active)
-            throw new Meteor.Error('not-authorized');
-
         // TODO charge UMC fee
         // TODO return remaining UMC
 
         // Update policy
         Policies.update(policyId, { $set: {
-            active,
-            createdAt: active ? new Date() : policy.createdAt, // Reset policy create date
+            active: false,
+            deactivatedAt: new Date(),
+        } });
+    },
+    'policies.addFunds'(policyId, amountAdditional) {
+        check(policyId, String);
+        check(amountAdditional, Match.Integer);
+
+        // Ensure user owns active policy
+        const policy = Policies.findOne(policyId);
+        if (policy.owner !== this.userId && policy.active)
+            throw new Meteor.Error('not-authorized');
+
+        // TODO take UMC
+
+        // Calculate policy data
+        const amount = policy.amount + amountAdditional;
+        const amountInitial =  policy.amountInitial + amountAdditional;
+        const payoutMax = amountInitial * PAYOUT_MULTIPLIER;
+        const payoutRemaining = policy.payoutRemaining + amountAdditional * PAYOUT_MULTIPLIER;
+
+        // Update policy
+        Policies.update(policyId, { $set: {
+            amount,
+            amountInitial,
+            payoutMax,
+            payoutRemaining,
         } });
     },
 });
