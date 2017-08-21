@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
+import { Policies } from './policies.js';
+
 export const VOTE_YES = 0;
 export const VOTE_NO = 1;
 export const VOTE_NMI = 2;
@@ -24,6 +26,11 @@ Meteor.methods({
 
         // Ensure user logged in
         if (!this.userId)
+            throw new Meteor.Error('not-authorized');
+
+        // Ensure active policy
+        const policy = Policies.findOne({ owner: this.userId, active: true })
+        if (!policy)
             throw new Meteor.Error('not-authorized');
 
         // Insert claim

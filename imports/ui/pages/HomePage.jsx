@@ -29,7 +29,7 @@ class HomePage extends Component {
                         <PolicyCard policy={this.props.policy} />
                     </div>
                     <div className="col s12 l4">
-                        <ClaimListCard claims={this.props.claims} />
+                        <ClaimListCard claims={this.props.claims} policy={this.props.policy} />
                     </div>
                 </div>
                 <div className="row">

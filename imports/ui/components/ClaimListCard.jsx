@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 import ClaimFileModal from './ClaimFileModal.jsx';
 
@@ -20,11 +21,16 @@ export default class ClaimListCard extends React.Component {
     }
 
     render() {
+        const buttonClassName = classnames({
+            "modal-trigger btn-floating halfway-fab waves-effect waves-light": true,
+            disabled: !this.props.policy,
+        });
+
         return (
             <div>
                 <div className="claim-list-card card medium">
                     <div className="card-header">
-                        <a href="#claimFileModal" className="modal-trigger btn-floating halfway-fab waves-effect waves-light">
+                        <a href="#claimFileModal" className={buttonClassName}>
                             <i className="material-icons">add</i>
                         </a>
                         <div className="card-title">My Claims</div>
@@ -41,4 +47,5 @@ export default class ClaimListCard extends React.Component {
 
 ClaimListCard.propTypes = {
     claims: React.PropTypes.array.isRequired,
+    policy: React.PropTypes.object,
 };
