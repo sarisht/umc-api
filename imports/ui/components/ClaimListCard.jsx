@@ -39,7 +39,7 @@ export default class ClaimListCard extends React.Component {
                         {this.props.claims.length === 0 ? this.renderEmpty() : this.props.claims.map(this.renderClaim)}
                     </ul>
                 </div>
-                <ClaimFileModal/>
+                {this.props.policy ? <ClaimFileModal claims={this.props.claims} policy={this.props.policy}/> : null}
             </div>
         );
     }

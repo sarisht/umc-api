@@ -3,7 +3,7 @@ import { Random } from 'meteor/random';
 import { assert } from 'meteor/practicalmeteor:chai';
 
 import { Claims, VOTE_YES, VOTE_NO, VOTE_NMI } from './claims.js';
-import { Policies } from './policies.js';
+import { Policies, PAYOUT_MULTIPLIER } from './policies.js';
 
 if (Meteor.isServer) {
     function verifyActive(claimId, expected) {
@@ -20,6 +20,7 @@ if (Meteor.isServer) {
 
     describe('Claims', () => {
         describe('methods', () => {
+            const policyAmount = 100;
             const userId = Random.id();
             const otherUserId = Random.id();
             let claimId;
@@ -31,12 +32,12 @@ if (Meteor.isServer) {
 
                 // Insert policy
                 const insertPolicy = Meteor.server.method_handlers['policies.insert'];
-                insertPolicy.apply({ userId }, [100]);
+                insertPolicy.apply({ userId }, [policyAmount]);
                 const policyId = Policies.findOne()._id;
 
                 // Insert claim
                 const insertClaim = Meteor.server.method_handlers['claims.insert'];
-                insertClaim.apply({ userId }, [500]);
+                insertClaim.apply({ userId }, [policyAmount * PAYOUT_MULTIPLIER]);
 
                 // Verify count
                 assert.equal(Claims.find().count(), 1);
@@ -77,6 +78,14 @@ if (Meteor.isServer) {
                 // Set active to true
                 setActive.apply({ userId }, [claimId, true]);
                 verifyActive(claimId, true);
+            });
+
+            it('will throw insufficient-funds', function() {
+                assert.throws(() => {
+                    // Insert claim (any additional funds should result in insufficient-funds)
+                    const insertClaim = Meteor.server.method_handlers['claims.insert'];
+                    insertClaim.apply({ userId }, [100]);
+                }, Meteor.Error("insufficient-funds"));
             });
         });
     });

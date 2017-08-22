@@ -13,6 +13,16 @@ const VOTE_TYPES_MAX = 10;
 
 export const Claims = new Mongo.Collection('claims');
 
+// Return whether proposed ask + asks from outstanding claims is greater than payout remaining
+export function hasInsufficientFunds(ask, outstandingClaims, policy) {
+    var outstandingAskSum = 0;
+    outstandingClaims.forEach(function(claim) {
+        outstandingAskSum += claim.ask;
+    });
+
+    return ask + outstandingAskSum > policy.payoutRemaining;
+}
+
 if (Meteor.isServer) {
     // Only publish active claims
     Meteor.publish('claims', function() {
@@ -32,6 +42,11 @@ Meteor.methods({
         const policy = Policies.findOne({ owner: this.userId, active: true })
         if (!policy)
             throw new Meteor.Error('not-authorized');
+
+        // Ensure sufficient funds
+        const outstandingClaims = Claims.find({ owner: this.userId, active: true }).fetch();
+        if (hasInsufficientFunds(ask, outstandingClaims, policy))
+            throw new Error('insufficient-funds');
 
         // Insert claim
         Claims.insert({

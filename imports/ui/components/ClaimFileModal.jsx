@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 
+import { hasInsufficientFunds } from "../../api/claims.js";
+
 export default class ClaimFileModal extends React.Component {
     constructor(props) {
         super(props);
@@ -12,12 +14,18 @@ export default class ClaimFileModal extends React.Component {
         event.preventDefault();
 
         // Reset form
-        this.setState({ invalid: false })
+        this.setState({invalid: false});
 
         // Get input
         const ask = parseInt(ReactDOM.findDOMNode(this.refs.askInput).value);
         if (isNaN(ask) || ask <= 0) {
-            this.setState({ invalid: true })
+            this.setState({invalid: true});
+            return;
+        }
+
+        // Check for insufficient funds
+        if (hasInsufficientFunds(ask, this.props.claims, this.props.policy)) {
+            this.setState({invalid: true});
             return;
         }
 
@@ -64,3 +72,8 @@ export default class ClaimFileModal extends React.Component {
         );
     }
 }
+
+ClaimFileModal.propTypes = {
+    claims: React.PropTypes.array.isRequired,
+    policy: React.PropTypes.object.isRequired,
+};
