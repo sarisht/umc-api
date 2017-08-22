@@ -39,15 +39,7 @@ export default class ClaimFileModal extends React.Component {
         ReactDOM.findDOMNode(this.refs.askInput).value = '';
     }
 
-    initModal() {
-        $(document).ready(function() {
-            $('.modal').modal();
-        });
-    }
-
     render() {
-        this.initModal();
-
         return (
             <div id="claimFileModal" className="modal">
                 <div className="modal-content">

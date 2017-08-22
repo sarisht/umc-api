@@ -4,6 +4,11 @@ import classnames from 'classnames';
 import ClaimFileModal from './ClaimFileModal.jsx';
 
 export default class ClaimListCard extends React.Component {
+    handleFileClick(event) {
+        event.preventDefault();
+        $('#claimFileModal').modal('open');
+    }
+
     renderClaim(claim) {
         return (
             <a key={claim._id} href={"/claims/" + claim._id} className="collection-item avatar">
@@ -22,7 +27,7 @@ export default class ClaimListCard extends React.Component {
 
     render() {
         const buttonClassName = classnames({
-            "modal-trigger btn-floating halfway-fab waves-effect waves-light": true,
+            "btn-floating halfway-fab waves-effect waves-light": true,
             disabled: !this.props.policy,
         });
 
@@ -30,7 +35,7 @@ export default class ClaimListCard extends React.Component {
             <div>
                 <div className="claim-list-card card medium">
                     <div className="card-header">
-                        <a href="#claimFileModal" className={buttonClassName}>
+                        <a href="#" onClick={this.handleFileClick.bind(this)} className={buttonClassName}>
                             <i className="material-icons">add</i>
                         </a>
                         <div className="card-title">My Claims</div>
