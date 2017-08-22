@@ -14,7 +14,8 @@ export default class PolicyCard extends React.Component {
     }
 
     handleDelete() {
-        Meteor.call('policies.deactivate', this.props.policy._id, false);
+        if (confirm("Deleting your policy will also delete any outstanding claims. Are you sure?"))
+            Meteor.call('policies.deactivate', this.props.policy._id, false);
     }
 
     handleSubmit(event) {

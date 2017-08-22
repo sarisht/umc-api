@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
+import { Claims } from "./claims.js";
+
 export const PAYOUT_MULTIPLIER = 5;
 
 export const Policies = new Mongo.Collection('policies');
@@ -53,11 +55,18 @@ Meteor.methods({
         // TODO charge UMC fee
         // TODO return remaining UMC
 
+        // TODO consider moving this to claims.js
+        // Deactivate outstanding claims
+        Claims.update({ owner: this.userId, active: true }, { $set: {
+            active: false,
+            deactivatedAt: new Date(),
+        }}, {multi: true});
+
         // Update policy
         Policies.update(policyId, { $set: {
             active: false,
             deactivatedAt: new Date(),
-        } });
+        }});
     },
     'policies.addFunds'(policyId, amountAdditional) {
         check(policyId, String);

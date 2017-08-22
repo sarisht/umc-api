@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { assert } from 'meteor/practicalmeteor:chai';
 
+import { Claims } from "./claims.js";
 import { Policies, PAYOUT_MULTIPLIER } from './policies.js';
 
 if (Meteor.isServer) {
@@ -18,6 +19,7 @@ if (Meteor.isServer) {
 
             beforeEach(() => {
                 // Remove policies
+                Claims.remove({});
                 Policies.remove({});
 
                 // Insert policy
@@ -44,10 +46,19 @@ if (Meteor.isServer) {
                 // Ensure active
                 verifyActive(policyId, true);
 
+                // Insert claims
+                const insertClaim = Meteor.server.method_handlers['claims.insert'];
+                insertClaim.apply({ userId }, [amount]);
+                insertClaim.apply({ userId }, [amount]);
+                assert.equal(Claims.find({ active: true }).count(), 2);
+
                 // Set active to false
                 const setActive = Meteor.server.method_handlers['policies.deactivate'];
                 setActive.apply({ userId }, [policyId, false]);
                 verifyActive(policyId, false);
+
+                // Ensure that claim is inactive
+                assert.equal(Claims.find({ active: true }).count(), 0);
             });
 
             it('can add funds', () => {
