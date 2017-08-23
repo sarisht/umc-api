@@ -48,8 +48,8 @@ if (Meteor.isServer) {
 
                 // Insert claims
                 const insertClaim = Meteor.server.method_handlers['claims.insert'];
-                insertClaim.apply({ userId }, [amount]);
-                insertClaim.apply({ userId }, [amount]);
+                insertClaim.apply({ userId }, [amount, "Title", "Description"]);
+                insertClaim.apply({ userId }, [amount, "Title", "Description"]);
                 assert.equal(Claims.find({ active: true }).count(), 2);
 
                 // Set active to false

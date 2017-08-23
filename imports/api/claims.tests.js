@@ -33,11 +33,10 @@ if (Meteor.isServer) {
                 // Insert policy
                 const insertPolicy = Meteor.server.method_handlers['policies.insert'];
                 insertPolicy.apply({ userId }, [policyAmount]);
-                const policyId = Policies.findOne()._id;
 
                 // Insert claim
                 const insertClaim = Meteor.server.method_handlers['claims.insert'];
-                insertClaim.apply({ userId }, [policyAmount * PAYOUT_MULTIPLIER]);
+                insertClaim.apply({ userId }, [policyAmount * PAYOUT_MULTIPLIER, "Title", "Description"]);
 
                 // Verify count
                 assert.equal(Claims.find().count(), 1);
@@ -84,7 +83,7 @@ if (Meteor.isServer) {
                 assert.throws(() => {
                     // Insert claim (any additional funds should result in insufficient-funds)
                     const insertClaim = Meteor.server.method_handlers['claims.insert'];
-                    insertClaim.apply({ userId }, [100]);
+                    insertClaim.apply({ userId }, [100, "Title", "Description"]);
                 }, Meteor.Error("insufficient-funds"));
             });
         });

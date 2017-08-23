@@ -31,15 +31,21 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'claims.insert'(ask) {
-        check(ask, Match.Integer)
+    'claims.insert'(ask, title, description) {
+        check(ask, Match.Integer);
+        check(title, String);
+        check(description, String);
+
+        // Check input
+        if (ask <= 0 || title.length === 0 || description.length === 0)
+            throw new Meteor.Error('invalid-argument');
 
         // Ensure user logged in
         if (!this.userId)
             throw new Meteor.Error('not-authorized');
 
         // Ensure active policy
-        const policy = Policies.findOne({ owner: this.userId, active: true })
+        const policy = Policies.findOne({ owner: this.userId, active: true });
         if (!policy)
             throw new Meteor.Error('not-authorized');
 
@@ -52,6 +58,8 @@ Meteor.methods({
         Claims.insert({
             active: true,
             ask,
+            title,
+            description,
             owner: this.userId,
             votes: {}, // userId -> vote
             voteCounts: new Array(VOTE_TYPES_MAX).fill(0), // voteType -> count

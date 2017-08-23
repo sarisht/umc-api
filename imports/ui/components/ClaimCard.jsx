@@ -8,7 +8,7 @@ export default class ClaimCard extends React.Component {
                     <span><i className="material-icons circle">directions_car</i></span>
                 </div>
                 <div className="card-content">
-                    <span className="card-title">Auto Claim</span>
+                    <span className="card-title truncate">{this.props.claim.title}</span>
                     <p className="text-secondary">{this.props.claim.ask} UMC</p>
                 </div>
                 <div className="card-action">

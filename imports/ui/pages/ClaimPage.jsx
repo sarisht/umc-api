@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import { moment } from "meteor/momentjs:moment";
 
 import ClaimEvidenceCard from '../components/ClaimEvidenceCard.jsx';
 import ClaimDiscussionCard from '../components/ClaimDiscussionCard.jsx';
@@ -53,18 +54,18 @@ class ClaimPage extends React.Component {
             <div className="claim-detail-card card">
                 <div className="card-header">
                     <span className="card-title">
-                        My Van Was Rear-Ended
+                        {this.props.claim.title}
                         {this.isOwner() ? <i className="material-icons right">mode_edit</i> : null}
                     </span>
                 </div>
                 <div className="card-content">
-                    <p className="text-secondary right">Aug 20</p>
+                    <p className="text-secondary right">{moment(this.props.claim.createdAt).format('MMM D')}</p>
                     <div className="avatar">
                         <i className="material-icons circle">person</i>
                         <span>Gingerbread Man</span>
                         <p className="text-secondary">cd2a3d9f938e13cd947ec05abc7fe734df8dd826</p>
                     </div>
-                    <p className="claim-description">In in culpa nulla elit esse. Ex cillum enim aliquip sit sit ullamco ex eiusmod fugiat. Cupidatat ad minim officia mollit laborum magna dolor tempor cupidatat mollit. Est velit sit ad aliqua ullamco laborum excepteur dolore proident incididunt in labore elit.</p>
+                    <p className="claim-description">{this.props.claim.description}</p>
                 </div>
             </div>
         );

@@ -13,7 +13,7 @@ export default class ClaimListCard extends React.Component {
         return (
             <a key={claim._id} href={"/claims/" + claim._id} className="collection-item avatar">
                 <i className="material-icons circle">directions_car</i>
-                <span className="title">Auto Claim</span>
+                <span className="title">{claim.title}</span>
                 <p className="text-secondary">{claim.ask} UMC</p>
             </a>
         );

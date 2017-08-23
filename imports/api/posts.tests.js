@@ -25,7 +25,7 @@ if (Meteor.isServer) {
 
                 // Insert claim
                 const insertClaim = Meteor.server.method_handlers['claims.insert'];
-                insertClaim.apply({ userId }, [500]);
+                insertClaim.apply({ userId }, [500, "Title", "Description"]);
 
                 // Get claim id
                 claimId = Claims.findOne()._id;
