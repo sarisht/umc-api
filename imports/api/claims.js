@@ -11,6 +11,8 @@ export const VOTE_FRAUD = 3;
 export const VOTE_INAPPROPRIATE = 4;
 const VOTE_TYPES_MAX = 10;
 
+export const CATEGORIES = ['auto', 'health', 'home', 'other'];
+
 export const Claims = new Mongo.Collection('claims');
 
 // Return whether proposed ask + asks from outstanding claims is greater than payout remaining
@@ -31,7 +33,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'claims.insert'(ask, title, description) {
+    'claims.insert'(ask, title, description, category = 'other') {
         check(ask, Match.Integer);
         check(title, String);
         check(description, String);
@@ -39,6 +41,10 @@ Meteor.methods({
         // Check input
         if (ask <= 0 || title.length === 0 || description.length === 0)
             throw new Meteor.Error('invalid-argument');
+
+        // Check categories
+        if (!CATEGORIES.includes(category))
+            throw new Meteor.Error('invalid-category');
 
         // Ensure user logged in
         if (!this.userId)
@@ -60,6 +66,7 @@ Meteor.methods({
             ask,
             title,
             description,
+            category,
             owner: this.userId,
             votes: {}, // userId -> vote
             voteCounts: new Array(VOTE_TYPES_MAX).fill(0), // voteType -> count

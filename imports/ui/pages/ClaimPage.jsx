@@ -3,6 +3,7 @@ import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { moment } from "meteor/momentjs:moment";
 
+import {categoryToIcon} from "../../helpers/categoryHelper"
 import ClaimEvidenceCard from '../components/ClaimEvidenceCard.jsx';
 import ClaimDiscussionCard from '../components/ClaimDiscussionCard.jsx';
 import StatCard from '../components/StatCard.jsx';
@@ -84,7 +85,7 @@ class ClaimPage extends React.Component {
                                 <StatCard caption="UMC Ask" metric={this.props.claim.ask} />
                             </div>
                             <div className="col s6">
-                                <StatCard caption="Auto Category" icon="directions_car" />
+                                <StatCard caption={this.props.claim.category + " category"} icon={categoryToIcon(this.props.claim.category)} />
                             </div>
                             <div className="col s12">
                                 <ClaimDiscussionCard claim={this.props.claim} />

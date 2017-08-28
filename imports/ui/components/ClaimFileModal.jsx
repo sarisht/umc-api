@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 
-import { hasInsufficientFunds } from "../../api/claims.js";
+import { CATEGORIES, hasInsufficientFunds } from "../../api/claims.js";
 
 export default class ClaimFileModal extends React.Component {
     constructor(props) {
@@ -43,8 +43,11 @@ export default class ClaimFileModal extends React.Component {
             return;
         }
 
+        // Get category
+        const category = ReactDOM.findDOMNode(this.refs.categoryInput).value;
+
         // Insert policy
-        Meteor.call('claims.insert', ask, title, description);
+        Meteor.call('claims.insert', ask, title, description, category);
 
         // Close modal
         $('#claimFileModal').modal('close');
@@ -62,14 +65,26 @@ export default class ClaimFileModal extends React.Component {
                             <div className="col s12">
                                 <h4>File Claim<i className="modal-close material-icons right">close</i></h4>
                             </div>
-                            <div className="input-field col s12 m6">
+                            <div className="input-field col s12">
                                 <input className={this.state.titleInvalid ? "invalid" : ""} ref="titleInput" id="titleInput" type="text"/>
                                 <label htmlFor="titleInput">Title</label>
                             </div>
+                        </div>
+                        <div className="row">
                             <div className="input-field col s12 m6">
                                 <input className={this.state.askInvalid ? "invalid" : ""} ref="askInput" id="claimAsk" type="text"/>
                                 <label htmlFor="claimAsk">Ask</label>
                             </div>
+                            <div className="col s12 m6">
+                                <select className="browser-default right" defaultValue="Select Category" ref="categoryInput">
+                                    <option disabled>Select Category</option>
+                                    {CATEGORIES.map((category) =>{
+                                        return <option key={category} value={category}>{category}</option>;
+                                    })}
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row">
                             <div className="input-field col s12">
                                 <textarea ref="descriptionInput" id="descriptionInput" className="materialize-textarea"/>
                                 <label htmlFor="descriptionInput">Description</label>

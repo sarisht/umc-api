@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import {categoryToIcon} from "../../helpers/categoryHelper"
 import ClaimFileModal from './ClaimFileModal.jsx';
 
 export default class ClaimListCard extends React.Component {
@@ -12,7 +13,7 @@ export default class ClaimListCard extends React.Component {
     renderClaim(claim) {
         return (
             <a key={claim._id} href={"/claims/" + claim._id} className="collection-item avatar">
-                <i className="material-icons circle">directions_car</i>
+                <i className="material-icons circle">{categoryToIcon(claim.category)}</i>
                 <span className="title">{claim.title}</span>
                 <p className="text-secondary">{claim.ask} UMC</p>
             </a>

@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { categoryToIcon } from "../../helpers/categoryHelper"
+
 export default class ClaimCard extends React.Component {
     render() {
         return (
             <div className="claim-card card">
                 <div className="card-header">
-                    <span><i className="material-icons circle">directions_car</i></span>
+                    <span><i className="material-icons circle">{categoryToIcon(this.props.claim.category)}</i></span>
                 </div>
                 <div className="card-content">
                     <span className="card-title truncate">{this.props.claim.title}</span>
