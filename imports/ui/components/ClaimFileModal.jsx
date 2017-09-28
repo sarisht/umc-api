@@ -46,6 +46,9 @@ export default class ClaimFileModal extends React.Component {
         // Get category
         const category = ReactDOM.findDOMNode(this.refs.categoryInput).value;
 
+        //Get Document
+        var x = document.getElementById("myFile");
+
         // Insert policy
         Meteor.call('claims.insert', ask, title, description, category);
 
@@ -73,7 +76,7 @@ export default class ClaimFileModal extends React.Component {
                         <div className="row">
                             <div className="input-field col s12 m6">
                                 <input className={this.state.askInvalid ? "invalid" : ""} ref="askInput" id="claimAsk" type="text"/>
-                                <label htmlFor="claimAsk">Ask</label>
+                                <label htmlFor="claimAsk">Amount to be claimed</label>
                             </div>
                             <div className="col s12 m6">
                                 <select className="browser-default right" defaultValue="Select Category" ref="categoryInput">
@@ -88,6 +91,12 @@ export default class ClaimFileModal extends React.Component {
                             <div className="input-field col s12">
                                 <textarea ref="descriptionInput" id="descriptionInput" className="materialize-textarea"/>
                                 <label htmlFor="descriptionInput">Description</label>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="input-field col s12">
+                            Add Documentation<br/>
+                                <input type="file" id="myFile" required/>
                             </div>
                         </div>
                         <div className="row">
