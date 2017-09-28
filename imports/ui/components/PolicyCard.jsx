@@ -22,7 +22,10 @@ export default class PolicyCard extends React.Component {
         event.preventDefault();
 
         // Get input
-        const amount = parseInt(ReactDOM.findDOMNode(this.refs.amountInput).value);
+        const amount_in_USD = parseInt(ReactDOM.findDOMNode(this.refs.amountInput).value);
+
+        //Converting the amount into UMC
+        const amount = 0.5*amount_in_USD; 
         if (isNaN(amount) || amount <= 0)
             return;
 
@@ -60,19 +63,23 @@ export default class PolicyCard extends React.Component {
             </div>
         );
     }
-
+    
     renderEditPolicyForm() {
         return (
             <div className="edit-policy card-content">
                 <div className="card-title">
                     <i onClick={this.handleEdit.bind(this)} className="material-icons right">close</i>
                 </div>
-                <h2>Add funds or delete your policy for a fee.</h2>
+                <h3>Add funds or delete your policy for a fee.</h3>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="row">
                         <div className="input-field col s8">
-                            <input ref="amountInput" placeholder="Enter Additional Funds (UMC)" type="text" />
+                            <input ref="amountInput" placeholder="Enter Additional Funds (USD)" type="text" />
+                            
                         </div>
+                        
+                            
+                       
                         <div className="input-field col s12">
                             <button type="submit" className="btn-large waves-effect waves-light">Add Coverage</button>&nbsp;
                             <button onClick={this.handleDelete.bind(this)} className="btn-flat btn-large">Delete Policy</button>
