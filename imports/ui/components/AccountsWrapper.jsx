@@ -14,6 +14,7 @@ export default class AccountsWrapper extends React.Component {
     }
     render() {
         // Just render a placeholder container that will be filled in
+        
         return <span ref="container" />;
     }
 }
