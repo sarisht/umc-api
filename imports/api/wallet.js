@@ -35,26 +35,37 @@ Meteor.methods({
         });
     },
 
-    'wallet.update'(id,amount,wallet,email) {
+    'wallet.update'(id,amount,wallet,wallet_address) {
        
-        if(bal<0)
-            throw new Meteor.Error('Insufficient Balance');
+        
         // Ensure user logged in
         if (!this.userId)
             throw new Meteor.Error('not-authorized');
+
+        wallet_address = parseInt(wallet_address);
+        //checking if recepient exists or not
+        var user = Wallet.findOne({wallet: wallet_address});
+        if(user == undefined)
+            throw new Meteor.Error('Recepient not found');
         
         var current = Wallet.findOne({_id: id}).balance;
-      
+       
         var balance = current-amount;
+
+        if(balance<0)
+            throw new Meteor.Error('Insufficient Balance');
+
         // Update Wallet of user
         Wallet.update(id, { $set: {
             wallet,
             balance,
         } });
-
-        console.log(id+balance+wallet);
+        
+        
+        console.log(typeof wallet_address);
+        
         //Update Wallet of recepient
-        var user = Wallet.findOne({email: email});
+       
         var recepient_id = user._id;
         var recepient_address = user.wallet;
         var recepient_bal = user.balance;

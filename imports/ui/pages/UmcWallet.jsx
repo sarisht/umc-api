@@ -29,7 +29,7 @@
         handleFileClickforSend(event) {
             console.log("f");
             event.preventDefault();
-            var email =  this.refs.email.value.trim();
+            var wallet_address =  this.refs.wallet.value.trim();
             var amount =  parseInt(this.refs.amount.value.trim());
             
             let res = this.address();
@@ -37,7 +37,7 @@
             address = res[0].wallet;
            
            
-            Meteor.call('wallet.update',id,amount,address,email);
+            Meteor.call('wallet.update',id,amount,address,wallet_address);
         }
 
         renderLoggedInWithWallet() {
@@ -62,8 +62,8 @@
                         <h5>Send UMC coins</h5>
                         <form onSubmit={this.handleFileClickforSend.bind(this)}>
                             <div>
-                                <label htmlFor="email">Email Address</label>
-                                <input type="email" ref="email" placeholder="Receiver's Email Address"/>
+                                <label htmlFor="number">Wallet Address</label>
+                                <input type="wallet" ref="wallet" placeholder="Receiver's Wallet Address"/>
                             </div>
                             <div>
                                 <label htmlFor="amount">Amount</label>

@@ -11,9 +11,9 @@
     "classnames": "^2.2.5",
     "history": "^4.7.2",
     "meteor-node-stubs": "~0.2.0",
-    "react": "^15.6.1",
+    "react": "^15.6.2",
     "react-addons-pure-render-mixin": "^15.6.0",
-    "react-dom": "^15.6.1",
+    "react-dom": "^15.6.2",
     "react-mounter": "^1.2.0",
     "react-router": "^4.2.0"
   },
