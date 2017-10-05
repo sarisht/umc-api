@@ -32,22 +32,36 @@ class ClaimPage extends React.Component {
         );
     }
 
+    check(){
+        // console.log(this.props.currentUser);
+        // console.log(this.props.claim.eligible_voters);
+        var userid = this.props.currentUser._id;
+        var voters = this.props.claim.eligible_voters;
+
+        for(i = 0; i < voters.length; i++){
+            if(voters[i] == userid)return true;
+        }
+
+        return false;
+    }
     renderVoteButtons() {
-        return (
-            <div className="claim-vote-card card">
-                <div className="card-content">
-                    <h5>How do you vote?</h5>
-                    <form>
-                        {this.renderVoteButton('Yes', VOTE_YES)}
-                        {this.renderVoteButton('No', VOTE_NO)}
-                        {this.renderVoteButton('Needs More Information', VOTE_NMI)}
-                        <div className="divider" />
-                        {this.renderVoteButton('Fraudulent', VOTE_FRAUD)}
-                        {this.renderVoteButton('Inappropriate', VOTE_INAPPROPRIATE)}
-                    </form>
+        if(this.check()){
+            return (
+                <div className="claim-vote-card card">
+                    <div className="card-content">
+                        <h5>How do you vote?</h5>
+                        <form>
+                            {this.renderVoteButton('Yes', VOTE_YES)}
+                            {this.renderVoteButton('No', VOTE_NO)}
+                            {this.renderVoteButton('Needs More Information', VOTE_NMI)}
+                            <div className="divider" />
+                            {this.renderVoteButton('Fraudulent', VOTE_FRAUD)}
+                            {this.renderVoteButton('Inappropriate', VOTE_INAPPROPRIATE)}
+                        </form>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 
     renderDetailCard() {

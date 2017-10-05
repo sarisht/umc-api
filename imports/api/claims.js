@@ -80,8 +80,9 @@ Meteor.methods({
         var potential_voters = [];
         for (i = 0; i < users.length; i++){
             if(users[i]._id!=this.userId ){
-                console.log(users[i]);
+                //console.log(users[i]);
                 potential_voters.push(users[i]._id);
+                //notify(users[i]._id);
             }
         }
         console.log(potential_voters);
