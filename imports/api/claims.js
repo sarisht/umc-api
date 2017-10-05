@@ -32,6 +32,20 @@ if (Meteor.isServer) {
     });
 }
 
+function getRandomSubarray(arr, size) {
+    size = parseInt(size);
+    var shuffled = arr.slice(0), i = arr.length, temp, index;
+    while (i--) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(0, size);
+}
+
+
+
 Meteor.methods({
     'claims.insert'(ask, title, description, category = 'other') {
         check(ask, Match.Integer);
@@ -60,6 +74,20 @@ Meteor.methods({
         if (hasInsufficientFunds(ask, outstandingClaims, policy))
             throw new Error('insufficient-funds');
 
+        //Getting a random sample of users
+        const users = Meteor.users.find().fetch();
+        console.log("ff" + users+users.length);
+        var potential_voters = [];
+        for (i = 0; i < users.length; i++){
+            if(users[i]._id!=this.userId ){
+                console.log(users[i]);
+                potential_voters.push(users[i]._id);
+            }
+        }
+        console.log(potential_voters);
+        //Getting 50% of users to vote
+        var random_voters = getRandomSubarray(potential_voters, potential_voters.length*0.5);
+        console.log(random_voters);
         // Insert claim
         Claims.insert({
             active: true,
@@ -71,6 +99,7 @@ Meteor.methods({
             votes: {}, // userId -> vote
             voteCounts: new Array(VOTE_TYPES_MAX).fill(0), // voteType -> count
             createdAt: new Date(),
+            eligible_voters: random_voters,
         });
     },
 
