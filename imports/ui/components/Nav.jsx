@@ -14,6 +14,7 @@ export default class Nav extends React.Component {
                         </div>
                     </a>
                     <ul className="right">
+                        <li><a href="/notifications">Notifications</a></li>
                         <li><a href="/umc-wallet">UMC Wallet</a></li>
                         <li><a href="/">Dashboard</a></li>
                         <li><a href="/how-it-works">How It Works</a></li>

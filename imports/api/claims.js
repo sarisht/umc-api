@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
 import { Policies } from './policies.js';
+import { Notifications } from './notifications.js';
 
 export const VOTE_YES = 0;
 export const VOTE_NO = 1;
@@ -76,7 +77,7 @@ Meteor.methods({
 
         //Getting a random sample of users
         const users = Meteor.users.find().fetch();
-        console.log("ff" + users+users.length);
+        
         var potential_voters = [];
         for (i = 0; i < users.length; i++){
             if(users[i]._id!=this.userId ){
@@ -90,7 +91,7 @@ Meteor.methods({
         var random_voters = getRandomSubarray(potential_voters, potential_voters.length*0.5);
         console.log(random_voters);
         // Insert claim
-        Claims.insert({
+        var inserted_claim = Claims.insert({
             active: true,
             ask,
             title,
@@ -102,6 +103,16 @@ Meteor.methods({
             createdAt: new Date(),
             eligible_voters: random_voters,
         });
+
+        
+        console.log(inserted_claim);
+        for (i = 0; i < random_voters.length; i++){
+        
+            //notifying random voters
+            Meteor.call('notifications.insert', random_voters[i], inserted_claim);
+            
+        }
+
     },
 
     'claims.vote'(claimId, voteNew) {

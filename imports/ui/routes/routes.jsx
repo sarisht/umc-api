@@ -7,6 +7,7 @@ import Footer from '../components/Footer.jsx';
 import HomePage from '../pages/HomePage.jsx';
 import HowItWorksPage from '../pages/HowItWorksPage.jsx';
 import UmcWallet from '../pages/UmcWallet.jsx';
+import NotificationsPage from '../pages/NotificationsPage.jsx';
 import Nav from '../components/Nav.jsx';
 
 export const renderRoutes = () => (
@@ -18,7 +19,8 @@ export const renderRoutes = () => (
                 <Route path="/claims/:id" component={ClaimPage} />
                 <Route exact path="/how-it-works" component={HowItWorksPage} />
                 <Route exact path="/umc-wallet" component={UmcWallet} />
-            </main>
+                <Route exact path="/notifications" component={NotificationsPage} />
+            </main>                                     
             <Footer />
         </div>
     </Router>
