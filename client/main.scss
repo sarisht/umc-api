@@ -284,6 +284,10 @@ iframe {
   margin-top: -6px;
 }
 
+#nav-mobile {
+  transform: translateX(-100%);
+}
+
 // Text
 .text-secondary {
   opacity: 0.54;

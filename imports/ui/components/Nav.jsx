@@ -3,23 +3,33 @@ import React from 'react';
 import AccountsWrapper from './AccountsWrapper.jsx';
 
 export default class Nav extends React.Component {
+    showSideNav(event) {
+        event.preventDefault();
+
+        let buttonCollapse = $('.button-collapse');
+        buttonCollapse.sideNav();
+        buttonCollapse.sideNav('show');
+    }
+
     render() {
         return (
             <nav>
                 <div className="nav-wrapper container">
-                    <a className="brand-logo left" href="/">
-                        <div className="valign-wrapper">
-                            <img src="https://static.wixstatic.com/media/0a69bd_7cca552ce8524e90915bd9fce092b812~mv2.png/v1/fill/w_496,h_486,al_c,usm_2.00_1.00_0.00/0a69bd_7cca552ce8524e90915bd9fce092b812~mv2.png" />
-                            <span>Umbrella Coin</span>
-                        </div>
-                    </a>
                     <ul className="right">
+                        <li><AccountsWrapper/></li>
+                    </ul>
+                    <ul className="right hide-on-med-and-down">
                         <li><a href="/notifications">Notifications</a></li>
                         <li><a href="/umc-wallet">UMC Wallet</a></li>
                         <li><a href="/">Dashboard</a></li>
-                        <li><a href="/how-it-works">How It Works</a></li>
-                        <li><AccountsWrapper /></li>
                     </ul>
+                    <ul id="nav-mobile" className="side-nav">
+                        <li><a href="/notifications">Notifications</a></li>
+                        <li><a href="/umc-wallet">UMC Wallet</a></li>
+                        <li><a href="/">Dashboard</a></li>
+                    </ul>
+                    <a href="#" onClick={this.showSideNav.bind(this)} data-activates="nav-mobile"
+                       className="button-collapse"><i className="material-icons">menu</i></a>
                 </div>
             </nav>
         );

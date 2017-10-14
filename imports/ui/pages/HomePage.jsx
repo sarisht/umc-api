@@ -45,7 +45,7 @@ class HomePage extends Component {
             <div className="section">
                 <div className="row">
                     <div className="col s12">
-                        <h4>Welcome to Umbrella Coin (UMC)!</h4>
+                        <h4>Welcome to the Next Generation of Insurance!</h4>
                         <p className="flow-text">We're a next-generation blockchain application for covering hidden costs of traditional insurance. As part of the UMC community, you are able to open policies and claims, as well as vote on claims by other members of our community. We're all here to help one another. Please create an account or log in to continue</p>
                     </div>
                 </div>
