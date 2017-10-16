@@ -7,7 +7,7 @@ export default class StatCard extends React.Component {
                 <div className="card-header valign-wrapper">
                     <div className="stat-content">
                         <h1>
-                            {this.props.metric ? this.props.metric : <i className="material-icons">{this.props.icon}</i> }
+                            {this.props.metric || this.props.metric === 0 ? this.props.metric : <i className="material-icons">{this.props.icon}</i> }
                         </h1>
                         <span className="text-secondary">{this.props.caption}</span>
                     </div>

@@ -37,9 +37,11 @@ class ClaimPage extends React.Component {
         // console.log(this.props.claim.eligible_voters);
         var userid = this.props.currentUser._id;
         var voters = this.props.claim.eligible_voters;
+        if (!voters)
+            return false;
 
         for(i = 0; i < voters.length; i++){
-            if(voters[i] == userid)return true;
+            if(voters[i] === userid)return true;
         }
 
         return false;
