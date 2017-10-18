@@ -1,14 +1,26 @@
 import React from 'react';
+import {Meteor} from 'meteor/meteor';
+import {createContainer} from 'meteor/react-meteor-data';
 
 import AccountsWrapper from './AccountsWrapper.jsx';
+import {Notifications} from '../../api/notifications.js';
 
-export default class Nav extends React.Component {
+class Nav extends React.Component {
     showSideNav(event) {
         event.preventDefault();
 
         let buttonCollapse = $('.button-collapse');
         buttonCollapse.sideNav();
         buttonCollapse.sideNav('show');
+    }
+
+    renderNotificationLink() {
+        return (
+            <a href="/notifications">Notifications
+                {this.props.notifications.length !== 0 ?
+                    <span className="new badge">{this.props.notifications.length}</span> : null}
+            </a>
+        );
     }
 
     render() {
@@ -19,12 +31,12 @@ export default class Nav extends React.Component {
                         <li><AccountsWrapper/></li>
                     </ul>
                     <ul className="right hide-on-med-and-down">
-                        <li><a href="/notifications">Notifications</a></li>
+                        <li>{this.renderNotificationLink()}</li>
                         <li><a href="/umc-wallet">UMC Wallet</a></li>
                         <li><a href="/">Dashboard</a></li>
                     </ul>
                     <ul id="nav-mobile" className="side-nav">
-                        <li><a href="/notifications">Notifications</a></li>
+                        <li>{this.renderNotificationLink()}</li>
                         <li><a href="/umc-wallet">UMC Wallet</a></li>
                         <li><a href="/">Dashboard</a></li>
                     </ul>
@@ -35,3 +47,15 @@ export default class Nav extends React.Component {
         );
     }
 }
+
+Nav.propTypes = {
+    notifications: React.PropTypes.array,
+};
+
+export default createContainer(() => {
+    Meteor.subscribe('notifications');
+
+    return {
+        notifications: Notifications.find({user: Meteor.userId()}).fetch(),
+    };
+}, Nav);

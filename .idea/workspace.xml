@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="55356521-6d97-4693-9b67-ced42b3fb18c" name="Default" comment="">
+    <list default="true" id="55356521-6d97-4693-9b67-ced42b3fb18c" name="Default" comment="Improved UMCWallet page design and fixed a ClaimPage bug">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/StatCard.jsx" afterPath="$PROJECT_DIR$/imports/ui/components/StatCard.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/pages/ClaimPage.jsx" afterPath="$PROJECT_DIR$/imports/ui/pages/ClaimPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/pages/UmcWallet.jsx" afterPath="$PROJECT_DIR$/imports/ui/pages/UmcWallet.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/Nav.jsx" afterPath="$PROJECT_DIR$/imports/ui/components/Nav.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.meteor/local/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,20 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UmcWallet.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/imports/ui/pages/UmcWallet.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="92" column="26" lean-forward="true" selection-start-line="92" selection-start-column="26" selection-end-line="92" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -56,13 +41,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/client/main.scss" />
-        <option value="$PROJECT_DIR$/imports/ui/components/Nav.jsx" />
         <option value="$PROJECT_DIR$/imports/ui/routes/routes.jsx" />
         <option value="$PROJECT_DIR$/imports/ui/components/Footer.jsx" />
         <option value="$PROJECT_DIR$/client/main.html" />
         <option value="$PROJECT_DIR$/imports/ui/components/StatCard.jsx" />
         <option value="$PROJECT_DIR$/imports/ui/pages/ClaimPage.jsx" />
         <option value="$PROJECT_DIR$/imports/ui/pages/UmcWallet.jsx" />
+        <option value="$PROJECT_DIR$/imports/ui/pages/HomePage.jsx" />
+        <option value="$PROJECT_DIR$/imports/ui/components/Nav.jsx" />
       </list>
     </option>
   </component>
@@ -99,7 +85,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,6 +153,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -177,7 +163,7 @@
     <property name="js.meteor.project" value="true" />
     <property name="js.meteor.library.was.enabled" value="true" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
-    <property name="SearchEverywhereHistoryKey" value="statcard&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/components/StatCard.jsx&#10;claimpa&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/pages/ClaimPage.jsx&#10;nav.&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/components/Nav.jsx&#10;routes&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/routes/routes.jsx" />
+    <property name="SearchEverywhereHistoryKey" value="routes&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/routes/routes.jsx&#10;nav.j&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/components/Nav.jsx&#10;hom&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/pages/HomePage.jsx&#10;no&#9;null&#9;null&#10;statcard&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/components/StatCard.jsx&#10;claimpa&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/pages/ClaimPage.jsx&#10;nav.&#9;FILE&#9;file:///Users/davidlackey/WebstormProjects/umc-api/imports/ui/components/Nav.jsx" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -208,7 +194,9 @@
       <workItem from="1507075758314" duration="63000" />
       <workItem from="1508088749827" duration="35000" />
       <workItem from="1508088801628" duration="730000" />
-      <workItem from="1508118560970" duration="3229000" />
+      <workItem from="1508118560970" duration="3273000" />
+      <workItem from="1508198228820" duration="13000" />
+      <workItem from="1508205440353" duration="1606000" />
     </task>
     <task id="LOCAL-00001" summary="Mobile Optimized Website and Removed Umbrella References">
       <created>1508003979125</created>
@@ -217,24 +205,30 @@
       <option name="project" value="LOCAL" />
       <updated>1508003979126</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Improved UMCWallet page design and fixed a ClaimPage bug">
+      <created>1508130784781</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1508130784781</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6903000" />
+    <option name="totallyTimeSpent" value="8566000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24236111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24236111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -275,20 +269,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Mobile Optimized Website and Removed Umbrella References" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mobile Optimized Website and Removed Umbrella References" />
+    <MESSAGE value="Improved UMCWallet page design and fixed a ClaimPage bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved UMCWallet page design and fixed a ClaimPage bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/main.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/AccountsWrapper.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -504,13 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/api/wallet.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -560,18 +541,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/pages/HomePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="4" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/pages/ClaimPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/StatCard.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/pages/UmcWallet.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -583,38 +578,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/Nav.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/pages/ClaimPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/StatCard.jsx">
+    <entry file="file://$PROJECT_DIR$/imports/ui/pages/NotificationsPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="73" lean-forward="false" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/pages/UmcWallet.jsx">
+    <entry file="file://$PROJECT_DIR$/imports/ui/pages/HomePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="26" lean-forward="true" selection-start-line="92" selection-start-column="26" selection-end-line="92" selection-end-column="26" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="59" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#52#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/Nav.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="6" lean-forward="true" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
