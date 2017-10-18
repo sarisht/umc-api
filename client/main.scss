@@ -65,7 +65,7 @@ body {
   .collection {
     border: none;
     margin-top: 0;
-    overflow: scroll;
+    overflow-y: auto;
 
     .avatar {
       min-height: 0 !important;
