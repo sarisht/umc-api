@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 
 import { CATEGORIES, hasInsufficientFunds } from "../../api/claims.js";
+import { ClaimFiles } from "../../api/claimFiles";
 
 export default class ClaimFileModal extends React.Component {
     constructor(props) {
@@ -46,17 +47,33 @@ export default class ClaimFileModal extends React.Component {
         // Get category
         const category = ReactDOM.findDOMNode(this.refs.categoryInput).value;
 
-        //Get Document
-        var x = document.getElementById("myFile");
+        // Upload Document
+        const myFile = $("#myFile")[0];
+        if (myFile.files && myFile.files[0]) {
+            // We upload only one file, in case multiple files were selected
+            const upload = ClaimFiles.insert({
+                file: myFile.files[0],
+                streams: 'dynamic',
+                chunkSize: 'dynamic'
+            }, false);
 
-        // Insert policy
-        Meteor.call('claims.insert', ask, title, description, category);
+            upload.on('end', function (error, fileObj) {
+                if (error) {
+                    alert('Error during upload: ' + error);
+                } else {
+                    // Insert policy
+                    Meteor.call('claims.insert', ask, title, description, category, fileObj._id);
 
-        // Close modal
-        $('#claimFileModal').modal('close');
+                    // Close modal
+                    $('#claimFileModal').modal('close');
 
-        // Reset input
-        ReactDOM.findDOMNode(this.refs.askInput).value = '';
+                    // Reset input
+                    ReactDOM.findDOMNode(this.refs.askInput).value = '';
+                }
+            });
+
+            upload.start();
+        }
     }
 
     render() {
@@ -68,17 +85,30 @@ export default class ClaimFileModal extends React.Component {
                             <div className="col s12">
                                 <h4>File Claim<i className="modal-close material-icons right">close</i></h4>
                             </div>
-                            <div className="input-field col s12">
+                        </div>
+                        <div className="row">
+                            <div className="input-field col s12 m7">
                                 <input className={this.state.titleInvalid ? "invalid" : ""} ref="titleInput" id="titleInput" type="text"/>
                                 <label htmlFor="titleInput">Title</label>
                             </div>
+                            <div className="input-field col s12 m5">
+                                <input className={this.state.askInvalid ? "invalid" : ""} ref="askInput" id="claimAsk" type="text"/>
+                                <label htmlFor="claimAsk">Amount to be claimed (UMC)</label>
+                            </div>
                         </div>
                         <div className="row">
-                            <div className="input-field col s12 m6">
-                                <input className={this.state.askInvalid ? "invalid" : ""} ref="askInput" id="claimAsk" type="text"/>
-                                <label htmlFor="claimAsk">Amount to be claimed</label>
+                            <div className="input-field col s12 m7">
+                                <div className="file-field">
+                                    <div className="btn">
+                                        <span>File</span>
+                                        <input type="file" id="myFile" required/>
+                                    </div>
+                                    <div className="file-path-wrapper">
+                                        <input className="file-path validate" placeholder="/path/to/documentation.pdf" type="text"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col s12 m6">
+                            <div className="col s12 m5">
                                 <select className="browser-default right" defaultValue="Select Category" ref="categoryInput">
                                     <option disabled>Select Category</option>
                                     {CATEGORIES.map((category) =>{
@@ -92,15 +122,7 @@ export default class ClaimFileModal extends React.Component {
                                 <textarea ref="descriptionInput" id="descriptionInput" className="materialize-textarea"/>
                                 <label htmlFor="descriptionInput">Description</label>
                             </div>
-                        </div>
-                        <div className="row">
                             <div className="input-field col s12">
-                            Add Documentation<br/>
-                                <input type="file" id="myFile" required/>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col s12">
                                 <button className="btn-large waves-effect waves-light" type="submit">Submit</button>
                             </div>
                         </div>

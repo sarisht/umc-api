@@ -45,10 +45,8 @@ function getRandomSubarray(arr, size) {
     return shuffled.slice(0, size);
 }
 
-
-
 Meteor.methods({
-    'claims.insert'(ask, title, description, category = 'other') {
+    'claims.insert'(ask, title, description, category = 'other', claimFileId = '') {
         check(ask, Match.Integer);
         check(title, String);
         check(description, String);
@@ -97,6 +95,7 @@ Meteor.methods({
             title,
             description,
             category,
+            claimFileId,
             owner: this.userId,
             votes: {}, // userId -> vote
             voteCounts: new Array(VOTE_TYPES_MAX).fill(0), // voteType -> count

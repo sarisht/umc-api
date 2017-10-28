@@ -1,18 +1,17 @@
+import { createContainer } from 'meteor/react-meteor-data';
 import React from 'react';
 
-export default class ClaimEvidenceCard extends React.Component {
-    render() {
-        const src = "https://rac.com.au/-/media/images/rac-website/tile-images/images/car-motoring/insurance/car_crash_rs.jpg";
+import {ClaimFiles} from '../../api/claimFiles'
 
+class ClaimEvidenceCard extends React.Component {
+    render() {
         return (
             <div className="card">
-                <div className="card-image waves-effect waves-block waves-light">
-                    <a href={src} target="_blank">
-                        <img src={src} />
-                    </a>
-                </div>
                 <div className="card-content">
-                    <p>Passenger-side photo from the crash.</p>
+                    <div className="card-title">Evidence</div>
+                    {this.props.claimFile
+                        ? <a href={this.props.claimFile.link()} download={true}>{this.props.claimFile.name}</a>
+                        : <p>No evidence provided.</p>}
                 </div>
             </div>
         );
@@ -21,4 +20,14 @@ export default class ClaimEvidenceCard extends React.Component {
 
 ClaimEvidenceCard.propTypes = {
     claim: React.PropTypes.object.isRequired,
+    claimFile: React.PropTypes.object,
 };
+
+export default createContainer((props) => {
+    Meteor.subscribe('files.claimFiles.all');
+
+    return {
+        claim: props.claim,
+        claimFile: ClaimFiles.findOne({ _id: props.claim.claimFileId })
+    };
+}, ClaimEvidenceCard);

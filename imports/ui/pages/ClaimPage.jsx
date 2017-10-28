@@ -116,9 +116,6 @@ class ClaimPage extends React.Component {
                             <div className="col s12">
                                 <ClaimEvidenceCard claim={this.props.claim} />
                             </div>
-                            <div className="col s12">
-                                <ClaimEvidenceCard claim={this.props.claim} />
-                            </div>
                         </div>
                     </div>
                 </div>
