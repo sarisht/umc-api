@@ -4,7 +4,22 @@ import {createContainer} from 'meteor/react-meteor-data';
 
 import StatCard from '../components/StatCard.jsx';
 import {Wallet} from '../../api/wallet.js';
+/*
+Available Accounts
+==================
+0) 0xd3aaa525c087978133abb517593ea334f16abd1f
+(1) 0xff2b56315dc5372b45dfa3773c4cfd64f70c8e9c
+(2) 0x5d7749b62fd56a2606f5595da5cebbdac1615967
+(3) 0x440ef76951f300145ac5e057a1cfd4c68a748279
+(4) 0x66d8ea058f920b0ee1ec67ce45c1c3ae175e5375
+(5) 0x950b75db89862a74249065575a469af10ffe7b72
+(6) 0xb82690d44228bdcefae08723b133335a3f1608bb
+(7) 0x6c7b6d5dc12edf06651afe9a3b033ef072f047a4
+(8) 0xea1aeec28d8a6e4072610ad234fc5ed406055f6e
+(9) 0x782698bad3e6e44b34d928b27e8c2734e2d11345
 
+
+*/
 
 class UmcWallet extends Component {
     handleFileClick(event) {
@@ -26,16 +41,22 @@ class UmcWallet extends Component {
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
             console.log("on the real network..?");
+            
+            
         } else {
             // set the provider you want from Web3.providers
             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
             console.log("on the local network..8545");
+            
         }
         //var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"floatHolder","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}];
-        
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         var myContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]);
-        var umc_address = '0x190fb342aa6a15eb82903323ae78066ff8616746';
-        var contract_data = myContract.at(0x4776bf4fe023ca7cacfdf92479240f33cd5430a2);
+        var sender = '0xd3aaa525c087978133abb517593ea334f16abd1f';
+        var receiver = '0xff2b56315dc5372b45dfa3773c4cfd64f70c8e9c';
+        
+        var umc = '0x90313357ab6b19df35356ce47434a615fedf5403';
+        var contract_data = myContract.at(umc);
         var Accounts = require('web3-eth-accounts');
         var accounts = new Accounts('http://localhost:8545');
         var wel = accounts.create();
@@ -48,19 +69,12 @@ class UmcWallet extends Component {
         // "Eth.providers.givenProvider" will be set if in an Ethereum supported browser.
         //var eth = new Eth(Eth.givenProvider || 'http://localhost:8545');
         var eth = new Eth('http://localhost:8545');
-        var acc1 = "0xcbf2bcc07015978c16b559bda6a20ff7b98d2cd8";
-        //new acc
-        // address: "0x8d3e37C565CE5Bd01f2B6d35d0b1A0BC82d23B75"
-        // encrypt: function encrypt()
-        // privateKey: "0xf1dd6714bf627ce49c3421c69b7d8aad77a5c3729f558fc85a7be8014afbd3ec"
-        // sign: function sign()
-        // signTransaction: function signTransaction()
-        //
-        var new_acc1 = "0x8d3e37C565CE5Bd01f2B6d35d0b1A0BC82d23B75";
-        eth.getBalance(acc1).then(console.log);
-        eth.getBalance(new_acc1).then(console.log);
-        contract_data.transfer(acc1,100);
         
+        eth.getBalance(sender).then(console.log);
+        eth.getBalance(receiver).then(console.log);
+        eth.getBalance(umc).then(console.log);
+        var getData = contract_data.transfer.getData(receiver,10000000);
+        web3.eth.sendTransaction({to:receiver, from:sender, data: getData});
         let wallet_address = this.refs.wallet.value.trim();
         let amount = parseInt(this.refs.amount.value.trim());
 
@@ -68,7 +82,7 @@ class UmcWallet extends Component {
         let id = res[0]._id;
         let address = res[0].wallet;
         
-        Meteor.call('wallet.update', id, amount, address, wallet_address);
+       // Meteor.call('wallet.update', id, amount, address, wallet_address);
     }
 
     renderRequestCoinsCard() {
