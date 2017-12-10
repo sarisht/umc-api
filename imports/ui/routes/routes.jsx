@@ -8,6 +8,7 @@ import HomePage from '../pages/HomePage.jsx';
 import UmcWallet from '../pages/UmcWallet.jsx';
 import NotificationsPage from '../pages/NotificationsPage.jsx';
 import Nav from '../components/Nav.jsx';
+import UserHistoryPage from '../pages/UserHistoryPage.jsx';
 
 export const renderRoutes = () => (
     <Router history={createBrowserHistory()}>
@@ -18,6 +19,7 @@ export const renderRoutes = () => (
                 <Route path="/claims/:id" component={ClaimPage} />
                 <Route exact path="/umc-wallet" component={UmcWallet} />
                 <Route exact path="/notifications" component={NotificationsPage} />
+                <Route exact path="/user-history" component={UserHistoryPage} />
             </main>                                     
             <Footer />
         </div>
