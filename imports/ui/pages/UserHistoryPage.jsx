@@ -1,9 +1,32 @@
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 
-export default class UserHistoryPage extends React.Component {
+import { Claims } from '../../api/claims.js';
+import ClaimListCard from '../components/ClaimListCard.jsx';
+
+class UserHistoryPage extends React.Component {
     render() {
         return (
-            <div>User History Page</div>
+           	<div className="section">
+                <div className="row">
+                    <div className="col s12 l4">
+                        <ClaimListCard claims={this.props.claims}/>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
+
+UserHistoryPage.propTypes = {
+    claims: React.PropTypes.array.isRequired,
+};
+
+export default createContainer(() => {
+    Meteor.subscribe('claims');
+
+    return {
+        claims: Claims.find({ owner: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
+    };
+}, UserHistoryPage);
