@@ -34,38 +34,7 @@ Private Keys
 
 
 */
-
-class UmcWallet extends Component {
-    handleFileClick(event) {
-        event.preventDefault();
-
-        let address = Math.floor(Math.random() * 900000) + 100000;
-        let balance =  0;
-        // Creation of wallet, pop up  for private key, address goes to database
-        var Accounts = require('web3-eth-accounts');
-        var accounts = new Accounts('http://localhost:8545');
-        var wel = accounts.create();
-        //console.log(wel);
-        Meteor.call('wallet.insert', address, balance);
-    }
-    //0xcbf2bcc07015978c16b559bda6a20ff7b98d2cd8
-    
-        
-handleFileClickforSend(event) {
-        event.preventDefault();
-
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-            console.log("on the real network..?");
-            
-            
-        } else {
-            // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-            console.log("on the local network..8545");
-            
-        }
-        var abi = [
+var abi = [
     {
         "constant": true,
         "inputs": [],
@@ -315,12 +284,44 @@ handleFileClickforSend(event) {
         "type": "function"
     }
 ];
+class UmcWallet extends Component {
+    handleFileClick(event) {
+        event.preventDefault();
+        // Creation of wallet, pop up for private key, address goes to database
+        var Accounts = require('web3-eth-accounts');
+        var accounts = new Accounts('http://localhost:8545');
+        var wel = accounts.create();
+        let balance =  0;
+        console.log(wel);
+        Meteor.call('wallet.insert', wel.address, balance);
+    }
+    //0xcbf2bcc07015978c16b559bda6a20ff7b98d2cd8
+    
+        
+handleFileClickforSend(event) {
+        event.preventDefault();
+
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+            console.log("on the real network..?");
+            
+            
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+            console.log("on the local network..8545");
+            
+        }
+        
         var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         var myContract = web3.eth.contract(abi);
-        web3.eth.defaultAccount = web3.eth.accounts[0];
+        let resi = this.props.wallet;
+        web3.eth.defaultAccount = resi[0].wallet;
+        console.log(resi[0].wallet);
         var receiver = document.getElementById('receiverWalletAddress'); 
+        console.log(receiver.value);
         var amount = document.getElementById('sendAmount');        
-        var umc = "0x84c69e19d0c94a10eca7caf16106eb51296e8410";
+        var umc = "0x25caa3e7a8349d2087523d240bbf40153de40c12";
         var contract_data = myContract.at(umc);
         contract_data.transfer(receiver.value,amount.value);
         let wallet_address = this.refs.wallet.value.trim();
@@ -328,7 +329,7 @@ handleFileClickforSend(event) {
         let id = res[0]._id;
         let address = res[0].wallet;
         
-       // Meteor.call('wallet.update', id, amount, address, wallet_address);
+       Meteor.call('wallet.update', id, amount.value, address, wallet_address);
     }
 
     renderRequestCoinsCard() {
