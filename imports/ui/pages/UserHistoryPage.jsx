@@ -8,7 +8,7 @@ import ClaimListCard from '../components/ClaimListCard.jsx';
 class UserHistoryPage extends React.Component {
     render() {
         return (
-           	<div className="section">
+            <div className="section">
                 <div className="row">
                     <div className="col s12 l4">
                         <ClaimListCard claims={this.props.claims}/>
