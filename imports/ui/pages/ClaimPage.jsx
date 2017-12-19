@@ -67,6 +67,7 @@ class ClaimPage extends React.Component {
     }
 
     renderDetailCard() {
+        const userLink = "/user-history/" + this.props.claim.owner;
         return (
             <div className="claim-detail-card card">
                 <div className="card-header">
@@ -79,7 +80,7 @@ class ClaimPage extends React.Component {
                     <p className="text-secondary right">{moment(this.props.claim.createdAt).format('MMM D')}</p>
                     <div className="avatar">
                         <i className="material-icons circle">person</i>
-                        <span>Gingerbread Man</span>
+                        <a href={userLink}>Gingerbread Man</a>
                         <p className="text-secondary">cd2a3d9f938e13cd947ec05abc7fe734df8dd826</p>
                     </div>
                     <p className="claim-description">{this.props.claim.description}</p>

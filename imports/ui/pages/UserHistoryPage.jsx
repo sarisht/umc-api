@@ -23,10 +23,10 @@ UserHistoryPage.propTypes = {
     claims: React.PropTypes.array.isRequired,
 };
 
-export default createContainer(() => {
+export default createContainer((props) => {
     Meteor.subscribe('claims');
 
     return {
-        claims: Claims.find({ owner: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
+        claims: Claims.find({ owner: props.match.params.id }, { sort: { createdAt: -1 } }).fetch(),
     };
 }, UserHistoryPage);
