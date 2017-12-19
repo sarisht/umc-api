@@ -5,32 +5,32 @@ import {createContainer} from 'meteor/react-meteor-data';
 import StatCard from '../components/StatCard.jsx';
 import {Wallet} from '../../api/wallet.js';
 /*
+
 Available Accounts
 ==================
-(0) 0x3dac6ca074800ea0cbdb0102c1fdfbe243150f7b
-(1) 0xc97e9208045fc73e39d35b51e6d6fd6a87304e2a
-(2) 0xb8425e6ea20e861630266d06eec9e33ec867cd8f
-(3) 0xf9ce40198ee899f74f66144fdd26ccbaec909ae2
-(4) 0x93b120834f48e63f79625fee75846471447d3382
-(5) 0xc02993506ab5f85fcc00d9bc9078949556364ef4
-(6) 0x44909a0e64cd5f5e229215581da5ff26546ac873
-(7) 0x6e9ab0bac2542aa98a658a172ea53f9792e853b1
-(8) 0xda6cddb3e9bf6d129c45523f6ad4efbfebed23e7
-(9) 0xdc1b7b964f7a9135e259dce196ae58a418095873
+(0) 0xafa94cc4cace51a8a42f744fac3751df2190a86e
+(1) 0x0f1a9f85c1489c149c1c692ea3dbb9c56d09790c
+(2) 0x388c520aa5c9f1d2f66b1a9131598273a4a5def5
+(3) 0x7a5653410e6bcccb6c085f848d8dee4870129d2e
+(4) 0x5294ac1d576230af2ad4c001a0942a6fc8f84a87
+(5) 0xe64bdaf55bb318b26b3e561436e187129d70f93c
+(6) 0x27ee477c249cdb636aacc6f52675eeb43173d6ba
+(7) 0xb1b17af25ceb30542053a430ea160bb0e2bea7b2
+(8) 0x152eea120ffdd1832033e6bdd072cf9de126b01b
+(9) 0xa1a5411022d06aa5582d14aed22a93831f68790e
 
 Private Keys
 ==================
-(0) 2a255c360c443fc4be6de754741693246beecce0d0ab1b47272a056cbf5d6673
-(1) 089e7900ca3fe26d70e9850d11e78b14c980f1d61c708d7a57cfea265b5be714
-(2) 03bf41bc4bf2a85772e07828c2a561eeb9c94633daade74f588f83836b43593b
-(3) b4eb320444e487cd21cd17b85e5db9dec4c1d8d9525feab3eaf75867563dbd0c
-(4) b6f1638f9ce4bebf0dffc231f527b9e7cef7eacedfe56240a7e8d9a9172b7b76
-(5) db6390b18668ffc28ba75387efb6042383ca153a9184d8d604ca007742e63805
-(6) 2b88d5a7d27f1e56c1b411ae25ba2574dfbe72803501a0b765c017dfb31f2784
-(7) 679c8ddfe342c66780e64429514c6e05577a814952bfd3dfe8439e601c5b23e2
-(8) b10daa213fba865a78f8846bc1e7321b6ffcf320a8a1fe1abfa371fa1a79226b
-(9) f719c2f7ebdf95abd394de8f98f56ca6cd267984a19ceb5ce1348cf1df8d4f06
-
+(0) 3ae1c09679b1df52f9bd72725199ae38f3790f05ee5e8534de79b7ab4cc140eb
+(1) 8da9f3aeb997493f1cf1a8bfbd105ac68e4969e240e29db9bf80618b04997c06
+(2) 5e0a3950dda7ad68a2e23fce05509936cb642dc2b59d575b7df8bfd55ca1eb64
+(3) b6a35ad8797b64caae630354230dbe2f39127b99b8c5a22e55fbdc8f64951721
+(4) 867fd0efe442e93a7ef89fd6703459ad7227aa325fbd6ec7f2bfe673999e23f6
+(5) 9d8e395e91be1da321e121900d240818ee50411243e289db89209a9fa79d15ba
+(6) a4cc39f293a4c6c1711bae86ec9d6eeb01a5343ef9ad8196d9e75427f939eb87
+(7) 499f6b86a4f4dff755e22cc168950ebd44bd21b5bc1345c3318442ca3c98f1f5
+(8) 322121eb13fd0f9a0012cd68d0ab9fa2d700611e36064f60487d5efeb0f963ba
+(9) 1e5779fe10a44aaf00d73ea3e47e745751b2a1ac5ecde97ac4dc5d8f135e739f
 
 
 */
@@ -40,16 +40,18 @@ class UmcWallet extends Component {
         event.preventDefault();
 
         let address = Math.floor(Math.random() * 900000) + 100000;
-        let balance = 0;
+        let balance =  0;
         // Creation of wallet, pop up  for private key, address goes to database
-        // var Accounts = require('web3-eth-accounts');
-        // var accounts = new Accounts('http://localhost:8545');
-        // var wel = accounts.create();
-        // console.log(wel);
+        var Accounts = require('web3-eth-accounts');
+        var accounts = new Accounts('http://localhost:8545');
+        var wel = accounts.create();
+        //console.log(wel);
         Meteor.call('wallet.insert', address, balance);
     }
     //0xcbf2bcc07015978c16b559bda6a20ff7b98d2cd8
-    handleFileClickforSend(event) {
+    
+        
+handleFileClickforSend(event) {
         event.preventDefault();
 
         if (typeof web3 !== 'undefined') {
@@ -63,36 +65,265 @@ class UmcWallet extends Component {
             console.log("on the local network..8545");
             
         }
-        //var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"floatHolder","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}];
-        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-        var myContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]);
-        var sender = '0x3dac6ca074800ea0cbdb0102c1fdfbe243150f7b';
-        var receiver = '0xc97e9208045fc73e39d35b51e6d6fd6a87304e2a';
-        
-        var umc = '0x36692a83397812b1d06e688da348dd34219ddd41';
+        var abi = [
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "floatHolder",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "name": "_spender",
+                "type": "address"
+            }
+        ],
+        "name": "allowance",
+        "outputs": [
+            {
+                "name": "remaining",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_owner",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "name": "balance",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Approval",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Transfer",
+        "type": "event"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "name": "_value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_spender",
+                "type": "address"
+            },
+            {
+                "name": "_value",
+                "type": "uint256"
+            }
+        ],
+        "name": "approve",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_from",
+                "type": "address"
+            },
+            {
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "name": "_value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferFrom",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+];
+        var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        var myContract = web3.eth.contract(abi);
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+        var receiver = document.getElementById('receiverWalletAddress'); 
+        var amount = document.getElementById('sendAmount');        
+        var umc = "0x84c69e19d0c94a10eca7caf16106eb51296e8410";
         var contract_data = myContract.at(umc);
-        var Accounts = require('web3-eth-accounts');
-        var accounts = new Accounts('http://localhost:8545');
-        var wel = accounts.create();
-        console.log(wel);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-        console.log(myContract);
-        console.log(contract_data);
-
-        var Eth = require('web3-eth');
-        
-        // "Eth.providers.givenProvider" will be set if in an Ethereum supported browser.
-        //var eth = new Eth(Eth.givenProvider || 'http://localhost:8545');
-        var eth = new Eth('http://localhost:8545');
-        
-        eth.getBalance(sender).then(console.log);
-        eth.getBalance(receiver).then(console.log);
-        eth.getBalance(umc).then(console.log);
-        //var getData = contract_data.transfer.getData(receiver,100);
-        //web3.eth.sendTransaction({to:receiver, from:sender, data: getData});
-        web3.eth.sendTransaction({to:receiver, from:sender, value:web3.toWei("0.5", "ether")})
+        contract_data.transfer(receiver.value,amount.value);
         let wallet_address = this.refs.wallet.value.trim();
-        let amount = parseInt(this.refs.amount.value.trim());
-
         let res = this.props.wallet;
         let id = res[0]._id;
         let address = res[0].wallet;
