@@ -284,17 +284,19 @@ var abi = [
         "type": "function"
     }
 ];
-
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+var myContract = web3.eth.contract(abi);
+var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
+var contract_data = myContract.at(umc);
 class UmcWallet extends Component {
     handleFileClick(event) {
-        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         event.preventDefault();
         // Creation of wallet, pop up for private key, address goes to database
         var Accounts = require('web3-eth-accounts');
         var accounts = new Accounts('http://localhost:8545');
         var wel = web3.personal.newAccount('!@superpassword');
         var balance =  0;
-        console.log(wel);
+        // console.log(wel);
         Meteor.call('wallet.insert', wel, balance);
     }
     //0xcbf2bcc07015978c16b559bda6a20ff7b98d2cd8
@@ -314,19 +316,12 @@ handleFileClickforSend(event) {
             console.log("on the local network..8545");
             
         }
-
-        var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
-        var myContract = web3.eth.contract(abi);
         let resi = this.props.wallet;
-        web3.personal.unlockAccount(resi[0].wallet,'!@superpassword')
-        web3.eth.defaultAccount = resi[0].wallet;
-        console.log(resi[0].wallet);
+        web3.personal.unlockAccount(web3.eth.defaultAccount,'!@superpassword');
+        //console.log(resi[0].wallet);
         var receiver = document.getElementById('receiverWalletAddress'); 
-        console.log(receiver.value);
-        var amount = document.getElementById('sendAmount');        
-        var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
-        var contract_data = myContract.at(umc);
+        //console.log(receiver.value);
+        var amount = document.getElementById('sendAmount');     
         contract_data.transfer(receiver.value,amount.value);
         let wallet_address = this.refs.wallet.value.trim();
         let res = this.props.wallet;
@@ -389,8 +384,8 @@ handleFileClickforSend(event) {
 
     renderLoggedInWithWallet() {
         let res = this.props.wallet;
-        const balance = res[0].balance;
-
+        web3.eth.defaultAccount = res[0].wallet;
+        var balance = parseInt(contract_data.balanceOf(web3.eth.defaultAccount));
         return (
             <div className="section">
                 <div className="row">
