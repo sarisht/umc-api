@@ -11,7 +11,7 @@ class UserHistoryPage extends React.Component {
             <div className="section">
                 <div className="row">
                     <div className="col s12 l4">
-                        <ClaimListCard claims={this.props.claims}/>
+                        <ClaimListCard claims={this.props.claims} isOwner={false}/>
                     </div>
                 </div>
             </div>

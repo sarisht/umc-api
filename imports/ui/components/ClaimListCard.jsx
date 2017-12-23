@@ -26,20 +26,26 @@ export default class ClaimListCard extends React.Component {
         );
     }
 
-    render() {
+    renderAddButton() {
         const buttonClassName = classnames({
             "btn-floating halfway-fab waves-effect waves-light": true,
             disabled: !this.props.policy,
         });
 
         return (
+            <a href="#" onClick={this.handleFileClick.bind(this)} className={buttonClassName}>
+                <i className="material-icons">add</i>
+            </a>
+        );
+    }
+
+    render() {
+        return (
             <div>
                 <div className="claim-list-card card medium">
                     <div className="card-header">
-                        <a href="#" onClick={this.handleFileClick.bind(this)} className={buttonClassName}>
-                            <i className="material-icons">add</i>
-                        </a>
-                        <div className="card-title">My Claims</div>
+                        {this.props.isOwner ? this.renderAddButton() : null}
+                        <div className="card-title">{this.props.isOwner ? "My Claims" : "Claims"}</div>
                     </div>
                     <ul className="collection">
                         {this.props.claims.length === 0 ? this.renderEmpty() : this.props.claims.map(this.renderClaim)}
@@ -53,5 +59,6 @@ export default class ClaimListCard extends React.Component {
 
 ClaimListCard.propTypes = {
     claims: React.PropTypes.array.isRequired,
+    isOwner: React.PropTypes.bool.isRequired,
     policy: React.PropTypes.object,
 };
