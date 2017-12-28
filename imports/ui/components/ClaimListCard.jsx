@@ -3,6 +3,9 @@ import classnames from 'classnames';
 
 import {categoryToIcon} from "../../helpers/categoryHelper"
 import ClaimFileModal from './ClaimFileModal.jsx';
+import Time from 'react-time';
+import { Meteor } from 'meteor/meteor';
+import { moment } from "meteor/momentjs:moment";
 
 export default class ClaimListCard extends React.Component {
     handleFileClick(event) {
@@ -27,9 +30,24 @@ export default class ClaimListCard extends React.Component {
     }
 
     renderAddButton() {
+        const claim_add = this.props.policy;
+        const cool_down = false;
+        //compare current date and policy's date
+        if(this.props.policy){
+            //console.log(this.props.policy.createdAt);
+            let then = this.props.policy.createdAt;
+            let now = new Date();
+            //console.log(now);
+            var v = moment(now).diff(then, 'days');
+            //console.log(v);
+            if(v > 180){
+                cool_down = true;
+            }
+        }
+        claim_add = claim_add && cool_down;
         const buttonClassName = classnames({
             "btn-floating halfway-fab waves-effect waves-light": true,
-            disabled: !this.props.policy,
+            disabled: !claim_add,
         });
 
         return (
