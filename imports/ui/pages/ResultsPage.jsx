@@ -271,7 +271,7 @@ var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
 
 class ResultsPage extends Component {
     
-    renderClaim(claim,staus) {
+    renderClaim(claim,status) {
         return (
             <ul><a key={claim._id} href={"/claims/" + claim._id} className="collection-item avatar">
                 <i className="material-icons circle">{categoryToIcon(claim.category)}</i>
@@ -293,8 +293,9 @@ class ResultsPage extends Component {
         let now = new Date();
         //console.log(now);
         var time = moment(now).diff(then, 'days');
+        var claim_expire_period = 180; //as of now, 6 months
         //console.log(v);
-        if(time > 180){
+        if(time > claim_expire_period){
             //it expires now
 
             //Deactivate the claims
@@ -303,8 +304,8 @@ class ResultsPage extends Component {
             //check the votecount
             var map = claim.VoteCounts;
             //if it wins
-            if(map[VOTE_YES].size > 0.5*map.size){
-                
+            if(map[VOTE_YES].length > 0.5 * map.length){
+
                     //Interface to transfer from pool's wallet to user's wallet//
                     let res = this.props.wallet;
                     console.log(res);

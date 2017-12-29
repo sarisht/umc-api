@@ -32,6 +32,7 @@ export default class ClaimListCard extends React.Component {
     renderAddButton() {
         const claim_add = this.props.policy;
         const cool_down = false;
+        var cool_down_period = 90;
         //compare current date and policy's date
         if(this.props.policy){
             //console.log(this.props.policy.createdAt);
@@ -40,7 +41,7 @@ export default class ClaimListCard extends React.Component {
             //console.log(now);
             var v = moment(now).diff(then, 'days');
             //console.log(v);
-            if(v > 180){
+            if(v > cool_down_period){
                 cool_down = true;
             }
         }
