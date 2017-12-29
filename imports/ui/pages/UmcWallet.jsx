@@ -358,6 +358,7 @@ handleFileClickforSend(event) {
         console.log(res);
         web3.eth.defaultAccount = res[0].wallet;
         var balance = parseInt(contract_data.balanceOf(web3.eth.defaultAccount));
+        console.log(web3.eth.defaultAccount);
         return (
             <div className="section">
                 <div className="row">

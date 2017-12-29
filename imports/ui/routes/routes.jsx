@@ -19,6 +19,7 @@ export const renderRoutes = () => (
                 <Route path="/claims/:id" component={ClaimPage} />
                 <Route exact path="/umc-wallet" component={UmcWallet} />
                 <Route exact path="/notifications" component={NotificationsPage} />
+                <Route exact path="/results" component={ResultsPage} />
                 <Route exact path="/user-history/:id" component={UserHistoryPage} />
             </main>                                     
             <Footer />

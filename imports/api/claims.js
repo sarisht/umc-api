@@ -118,6 +118,9 @@ Meteor.methods({
         check(claimId, String);
         check(voteNew, Match.Integer);
 
+        //Votes is  a hashmap mapping from userid to vote
+        //voteCounts is a hashmap from vote type to count
+
         // Check possible vote values
         if (![VOTE_YES, VOTE_NO, VOTE_NMI, VOTE_FRAUD, VOTE_INAPPROPRIATE].includes(voteNew))
             throw new Meteor.Error('invalid-argument');
