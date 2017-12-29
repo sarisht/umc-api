@@ -9,6 +9,7 @@ import UmcWallet from '../pages/UmcWallet.jsx';
 import NotificationsPage from '../pages/NotificationsPage.jsx';
 import Nav from '../components/Nav.jsx';
 import UserHistoryPage from '../pages/UserHistoryPage.jsx';
+import ResultsPage from '../pages/ResultsPage.jsx';
 
 export const renderRoutes = () => (
     <Router history={createBrowserHistory()}>
