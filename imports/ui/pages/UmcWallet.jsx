@@ -255,9 +255,19 @@ var abi = [
 		"type": "function"
 	}
 ]
-web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); 
+if (typeof web3 !== 'undefined') {
+    web3 = new Web3(web3.currentProvider);
+    console.log("on the real network..?");
+    
+    
+} else {
+    // set the provider you want from Web3.providers
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    console.log("on the local network..8545");
+    
+}
 var myContract = web3.eth.contract(abi);
-var umc = "0xa164b4f8fa0ad28e4d97ed8fbe62d2cc3f1c8a47";//"0x8b687dc25a172651174e3cace67c0f551ac8e277";
+var umc = "0x190fb342aa6a15eb82903323ae78066ff8616746";
 var contract_data = myContract.at(umc);
 class UmcWallet extends Component {
     handleFileClick(event) {
