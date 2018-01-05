@@ -18,10 +18,10 @@
     "react-mounter": "^1.2.0",
     "react-router": "^4.2.0",
     "react-time": "^4.3.0",
-    "web3": "^1.0.0-beta.26",
+    "web3": "^1.0.0-beta.27",
     "web3-eth": "^1.0.0-beta.24",
     "web3-eth-accounts": "^1.0.0-beta.27",
-    "web3-eth-personal": "^1.0.0-beta.26",
+    "web3-eth-personal": "^1.0.0-beta.27",
     "web3-utils": "^1.0.0-beta.26"
   },
   "devDependencies": {
