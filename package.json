@@ -9,6 +9,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
+    "ethereumjs-testrpc": "^6.0.3",
     "history": "^4.7.2",
     "meteor-node-stubs": "^0.2.11",
     "moment": "^2.20.1",

@@ -2,3 +2,4 @@ node_modules/
 .idea/
 .DS_Store
 imports/.DS_Store
+settings-staging.json
