@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { moment } from "meteor/momentjs:moment";
+import {Wallet} from "../../api/wallet";
+import { createContainer } from 'meteor/react-meteor-data';
 
 var abi = [
     {
@@ -258,7 +260,7 @@ var myContract = web3.eth.contract(abi);
 var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
 
 
-export default class PolicyCard extends React.Component {
+class PolicyCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = { inEdit: false };
@@ -406,4 +408,13 @@ export default class PolicyCard extends React.Component {
 
 PolicyCard.propTypes = {
     policy: React.PropTypes.object,
+    wallet: React.PropTypes.array,
 };
+
+export default createContainer(() => {
+    Meteor.subscribe('wallet');
+
+    return {
+        wallet: Wallet.find({owner: Meteor.userId()}, {sort: {createdAt: -1}}).fetch(),
+    };
+}, PolicyCard);
