@@ -286,7 +286,7 @@ var abi = [
 ];
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var myContract = web3.eth.contract(abi);
-var umc = "0xaa91776fd641a4b1a2e83b331d34fa8a9753d8a0";
+var umc = "0xd61d073a57a09c694dad55ab3fb88af5f9342c06";
 var contract_data = myContract.at(umc);
 class UmcWallet extends Component {
     handleFileClick(event) {
@@ -316,8 +316,7 @@ handleFileClickforSend(event) {
             console.log("on the local network..8545");
             
         }
-        let resi = this.props.wallet;
-        web3.personal.unlockAccount(web3.eth.defaultAccount,'!@superpassword');
+        web3.personal.unlockAccount(web3.eth.defaultAccount,'!@superpassword',5);
         //console.log(resi[0].wallet);
         var receiver = document.getElementById('receiverWalletAddress'); 
         //console.log(receiver.value);

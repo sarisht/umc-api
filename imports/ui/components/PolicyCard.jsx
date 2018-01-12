@@ -257,7 +257,7 @@ var abi = [
 ];
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var myContract = web3.eth.contract(abi);
-var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
+var umc = "0xd61d073a57a09c694dad55ab3fb88af5f9342c06";
 
 
 class PolicyCard extends React.Component {
@@ -279,25 +279,31 @@ class PolicyCard extends React.Component {
         event.preventDefault();
 
         // Get input
-        const amount_in_USD = parseInt(ReactDOM.findDOMNode(this.refs.amountInput).value);
+        const amount= parseInt(ReactDOM.findDOMNode(this.refs.amountInput).value);
 
-        //Converting the amount into UMC
-        const amount = 0.5*amount_in_USD; 
         if (isNaN(amount) || amount <= 0)
             return;
+
+
+        //Interface to transfer from user's wallet to shared pool's wallet//
+        //try{
+            let res = this.props.wallet;
+            sender = res[0].wallet;
+            console.log(web3.personal.unlockAccount(sender,'!@superpassword',5));
+            console.log(sender);
+            var contract_data = myContract.at(umc);
+            web3.eth.defaultAccount = sender;
+            contract_data.transfer(umc,amount);
 
         // Insert policy
         if (!this.props.policy)
             Meteor.call('policies.insert', amount);
         else
             Meteor.call('policies.addFunds', this.props.policy._id, amount);
-
-        //Interface to transfer from user's wallet to shared pool's wallet//
-        let res = this.props.wallet;
-        console.log(res);
-        sender = res[0].wallet;
-        var contract_data = myContract.at(sender);
-        contract_data.transfer(umc,ReactDOM.findDOMNode(this.refs.amountInput).value);
+        //}
+        //catch(e){
+            
+        //}
         //end//
         
         // Reset state
