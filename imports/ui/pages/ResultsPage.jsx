@@ -283,12 +283,12 @@ class ResultsPage extends Component {
     }
     
     checkStatus(claim){
-        if(claim.active == false){
-            return 0;
-        }
+        //if(!claim.active){
+        //    return 0;
+        //}
 
         //if it expires now, check the votecount,tranfer umc or not and set claim's active to be false
-
+        console.log(claim);
         let then = claim.createdAt;
         let now = new Date();
         //console.log(now);
@@ -303,8 +303,9 @@ class ResultsPage extends Component {
 
             //check the votecount
             var map = claim.VoteCounts;
+            console.log(map);
             //if it wins
-            if(map[VOTE_YES].length > 0.5 * map.length){
+            if(map['VOTE_YES'].length > 0.5 * map.length){
 
                     //Interface to transfer from pool's wallet to user's wallet//
                     let res = this.props.wallet;
@@ -327,11 +328,12 @@ class ResultsPage extends Component {
 
     all_claims(){
         var rows = [];
+        var claims = this.props.claims;
         for (var i=0; i < claims.length; i++) {
             //set vstatus if this claims has expired, then->inactive(0), otherwise->active(1)
-            var vstatus = this.checkStatus(claim);
-
-            rows.push(this.renderClaim(claims[i]),status);
+            var vstatus = this.checkStatus(claims[i]);
+            console.log(vstatus);
+            rows.push(this.renderClaim(claims[i]),vstatus);
         }
         return <tbody>{rows}</tbody>;
     }
@@ -344,13 +346,13 @@ class ResultsPage extends Component {
         );
     }
     renderLoggedIn(){
-        
         return (
             <div>
                 <center><h4>Results</h4></center>
             <div className="claim-list-card card medium">
                 <ul className="collection">
-                    {this.props.claims.length === 0  ? this.renderEmpty() : this.all_claims()}
+                    
+                    {this.props.claims.length===0  ? this.renderEmpty() : this.all_claims()}
                 </ul>
             </div>
         </div>
@@ -367,13 +369,12 @@ class ResultsPage extends Component {
     }
 
     render() {
-        console.log("f"+this.props.allclaims.length);
         return this.props.currentUser ? this.renderLoggedIn() : this.renderLoggedOut();
     }
 }
 
 ResultsPage.propTypes = {
-    claims: PropTypes.array.isRequired,
+    claims: PropTypes.object.isRequired,
     communityClaims: PropTypes.array.isRequired,
     currentUser: PropTypes.object,
     policy: PropTypes.object,
