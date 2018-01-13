@@ -39,7 +39,7 @@ export default class ClaimListCard extends React.Component {
             let then = this.props.policy.createdAt;
             let now = new Date();
             //console.log(now);
-            var v = moment(now).diff(then, 'days');
+            var v = moment(now).diff(then, 'seconds');
             //console.log(v);
             if(v > cool_down_period){
                 cool_down = true;

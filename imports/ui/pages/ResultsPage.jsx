@@ -265,8 +265,8 @@ var abi = [
 ];
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var myContract = web3.eth.contract(abi);
-var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
-
+var umc = "0x125e7343a671d134a55782ae147bfddbd3c6bc04";
+var pool = "0x875e5742c36413f04d66baa84a3209ad970f3c6f";
 
 
 class ResultsPage extends Component {
@@ -292,8 +292,8 @@ class ResultsPage extends Component {
         let then = claim.createdAt;
         let now = new Date();
         //console.log(now);
-        var time = moment(now).diff(then, 'days');
-        var claim_expire_period = 180; //as of now, 6 months
+        var time = moment(now).diff(then, 'seconds');
+        var claim_expire_period = 600; //as of now, 6 months
         //console.log(v);
         if(time > claim_expire_period){
             //it expires now
@@ -310,6 +310,9 @@ class ResultsPage extends Component {
                     let res = this.props.wallet;
                     console.log(res);
                     receiver= res[0].wallet;
+                    console.log(receiver);
+                    web3.eth.defaultAccount = pool;
+                    web3.personal.unlockAccount(pool,'!@superpassword',5);
                     var contract_data = myContract.at(umc);
                     contract_data.transfer(receiver,ask);
                     //end//

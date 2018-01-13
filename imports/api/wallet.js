@@ -42,7 +42,7 @@ Meteor.methods({
         if (!this.userId)
             throw new Meteor.Error('not-authorized');
 
-        wallet_address = parseInt(wallet_address);
+       // wallet_address = parseInt(wallet_address);
         //checking if recepient exists or not
         var user = Wallet.findOne({wallet: wallet_address});
         if(user == undefined)

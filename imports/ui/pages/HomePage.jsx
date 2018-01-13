@@ -262,8 +262,9 @@ var abi = [
 ];
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var myContract = web3.eth.contract(abi);
-var umc = "0x8b687dc25a172651174e3cace67c0f551ac8e277";
+var umc = "0x125e7343a671d134a55782ae147bfddbd3c6bc04";
 var contract_data = myContract.at(umc);
+var pool = "0x875e5742c36413f04d66baa84a3209ad970f3c6f";
 
 class HomePage extends Component {
     renderCommunityClaims(claims) {
@@ -277,7 +278,7 @@ class HomePage extends Component {
     }
 
     renderLoggedIn() {
-        var balance = parseInt(contract_data.balanceOf(umc));
+        var balance = parseInt(contract_data.balanceOf(pool));
         return (
             <div className="section">
                 <div className="row">

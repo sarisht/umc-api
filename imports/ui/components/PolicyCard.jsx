@@ -257,7 +257,7 @@ var abi = [
 ];
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var myContract = web3.eth.contract(abi);
-var umc = "0xd61d073a57a09c694dad55ab3fb88af5f9342c06";
+var umc = "0x125e7343a671d134a55782ae147bfddbd3c6bc04";
 
 
 class PolicyCard extends React.Component {
@@ -287,13 +287,14 @@ class PolicyCard extends React.Component {
 
         //Interface to transfer from user's wallet to shared pool's wallet//
         //try{
+            var pool = "0x875e5742c36413f04d66baa84a3209ad970f3c6f"
             let res = this.props.wallet;
             sender = res[0].wallet;
-            console.log(web3.personal.unlockAccount(sender,'!@superpassword',5));
+            web3.personal.unlockAccount(sender,'!@superpassword',5);
             console.log(sender);
             var contract_data = myContract.at(umc);
             web3.eth.defaultAccount = sender;
-            contract_data.transfer(umc,amount);
+            contract_data.transfer(pool,amount);
 
         // Insert policy
         if (!this.props.policy)
