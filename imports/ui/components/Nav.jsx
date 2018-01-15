@@ -25,7 +25,7 @@ class Nav extends React.Component {
 
     renderResults(){
         return (
-            <a href="/results">Results
+            <a href="/results">Pending Claims
                 {this.props.claims.length !== 0 ?
                     <span className="new badge">{this.props.claims.length}</span> : null}
             </a>

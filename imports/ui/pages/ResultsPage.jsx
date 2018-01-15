@@ -283,39 +283,38 @@ class ResultsPage extends Component {
     }
     
     checkStatus(claim){
-        //if(!claim.active){
-        //    return 0;
-        //}
+        if(!claim.active){
+            return 0;
+        }
 
         //if it expires now, check the votecount,tranfer umc or not and set claim's active to be false
-        console.log(claim);
         let then = claim.createdAt;
         let now = new Date();
         //console.log(now);
         var time = moment(now).diff(then, 'seconds');
-        var claim_expire_period = 600; //as of now, 6 months
+        var claim_expire_period = 240;//180; //as of now, 6 months
         //console.log(v);
         if(time > claim_expire_period){
             //it expires now
-
+            console.log("he4re");
             //Deactivate the claims
             Meteor.call('claims.setActive', claim._id, false);
 
             //check the votecount
-            var map = claim.VoteCounts;
+            var map = claim.voteCounts;
             console.log(map);
             //if it wins
-            if(map['VOTE_YES'].length > 0.5 * map.length){
+            
+            if(map[0] >= 0.5 * claim.eligible_voters.length){
 
                     //Interface to transfer from pool's wallet to user's wallet//
                     let res = this.props.wallet;
-                    console.log(res);
+                    console.log("in transfer thing"+res);
                     receiver= res[0].wallet;
                     console.log(receiver);
                     web3.eth.defaultAccount = pool;
-                    web3.personal.unlockAccount(pool,'!@superpassword',5);
                     var contract_data = myContract.at(umc);
-                    contract_data.transfer(receiver,ask);
+                    contract_data.transfer(receiver,claim.ask);
                     //end//
             }
             
@@ -329,11 +328,11 @@ class ResultsPage extends Component {
     all_claims(){
         var rows = [];
         var claims = this.props.claims;
+        console.log("here"+claims);
         for (var i=0; i < claims.length; i++) {
             //set vstatus if this claims has expired, then->inactive(0), otherwise->active(1)
             var vstatus = this.checkStatus(claims[i]);
-            console.log(vstatus);
-            rows.push(this.renderClaim(claims[i]),vstatus);
+            rows.push(this.renderClaim(claims[i]),!vstatus);
         }
         return <tbody>{rows}</tbody>;
     }
@@ -346,6 +345,8 @@ class ResultsPage extends Component {
         );
     }
     renderLoggedIn(){
+        console.log("it goes here");
+        console.log(this.props.claims);
         return (
             <div>
                 <center><h4>Results</h4></center>
@@ -380,7 +381,7 @@ ResultsPage.propTypes = {
     policy: PropTypes.object,
     wallet: React.PropTypes.object,
     notifications: React.PropTypes.object,
-    allclaims: React.PropTypes.object,
+
 };
 
 export default createContainer(() => {
@@ -392,12 +393,10 @@ export default createContainer(() => {
 
     return {
         communityClaims: Claims.find({ owner: { $ne: Meteor.userId() } }, { sort: { createdAt: -1 } }).fetch(),
-        //claims: Claims.find({ sort: { createdAt: -1 } }).fetch(),
         claims: Claims.find({ owner: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
         currentUser: Meteor.user(),
         policy: Policies.findOne({ owner: Meteor.userId() }),
         wallet: Wallet.find({ owner: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch(),
         notifications: Notifications.find({user: Meteor.userId()}).fetch(),
-        allclaims: Claims.find().fetch(),
     };
 }, ResultsPage);
