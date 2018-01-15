@@ -291,8 +291,8 @@ class ResultsPage extends Component {
         let then = claim.createdAt;
         let now = new Date();
         //console.log(now);
-        var time = moment(now).diff(then, 'seconds');
-        var claim_expire_period = 240;//180; //as of now, 6 months
+        var time = moment(now).diff(then, 'days');
+        var claim_expire_period = 60;//180; //as of now, 6 months
         //console.log(v);
         if(time > claim_expire_period){
             //it expires now
